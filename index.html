@@ -1,4 +1,16 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#F9EFFF"><meta name="description" content="دکتر بهانه؛ برای هر موقعیتی یک بهانه بامزه بساز، کپی کن و با دوستانت به اشتراک بگذار."><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg?v=3" type="image/svg+xml"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#F9EFFF">
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem("drBahanehTheme");
+    var theme = saved === "light" || saved === "dark" ? saved :
+      (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", theme);
+  } catch (e) {
+    document.documentElement.setAttribute("data-theme", "light");
+  }
+})();
+</script><meta name="description" content="دکتر بهانه؛ برای هر موقعیتی یک بهانه بامزه بساز، کپی کن و با دوستانت به اشتراک بگذار."><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg?v=3" type="image/svg+xml"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
 #launch-splash{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:linear-gradient(145deg,#F9EFFF 0%,#E6D9FF 100%);opacity:1;visibility:visible;transition:opacity .32s ease,visibility .32s ease}
 #launch-splash.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
 .launch-inner{display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;color:#6F58AA}
@@ -50,6 +62,13 @@ button,textarea{font:inherit}
 button{ -webkit-tap-highlight-color:transparent}
 .shell{width:min(1060px,100%);margin:auto;display:flex;flex-direction:column;gap:26px}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.top-actions{display:flex;align-items:center;justify-content:flex-end;gap:9px;flex-wrap:wrap}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font:700 .8rem var(--font);cursor:pointer;white-space:nowrap;transition:background .2s,border-color .2s,transform .2s}
+.theme-toggle:hover{border-color:var(--primary);background:var(--primary-soft);transform:translateY(-1px)}
+.theme-toggle:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+.theme-toggle .theme-icon{width:17px;height:17px;display:block;flex:none}
+@media(max-width:760px){.top-actions{gap:7px}.theme-toggle{min-height:38px;padding:7px 10px;font-size:.76rem}}
+@media(max-width:420px){.top-actions{gap:6px}.theme-toggle{padding:7px 9px}.theme-toggle .theme-label{display:none}}
 .brand{display:flex;align-items:center;gap:15px;min-width:0}
 .mascot-wrap{width:66px;height:66px;flex:none;display:grid;place-items:center;border-radius:22px;background:var(--primary-soft);transform:rotate(-4deg);transition:background .2s}
 .mascot{width:58px;height:58px}
@@ -154,8 +173,14 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
         <p class="sub">برای وقت‌هایی که کلمه‌ها کم می‌آرن.</p>
       </div>
     </div>
-    <div class="top-note" id="connection-status"><i></i><span id="connection-label">آماده‌ی اتصال به هوش مصنوعی</span></div>
-    <button class="install-btn" id="install-app" type="button" hidden>⬇ نصب برنامه</button>
+    <div class="top-actions">
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="فعال کردن حالت تاریک" title="فعال کردن حالت تاریک">
+        <svg class="theme-icon" id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z"/></svg>
+        <span class="theme-label" id="theme-label">حالت تاریک</span>
+      </button>
+      <div class="top-note" id="connection-status"><i></i><span id="connection-label">آماده‌ی اتصال به هوش مصنوعی</span></div>
+      <button class="install-btn" id="install-app" type="button" hidden>⬇ نصب برنامه</button>
+    </div>
   </header>
 
   <div class="intro">
@@ -439,6 +464,26 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     if (explicit === "dark") return true;
     if (explicit === "light") return false;
     return !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  }
+  function updateThemeButton() {
+    var dark = isDarkMode();
+    var button = $("theme-toggle");
+    if (!button) return;
+    button.setAttribute("aria-label", dark ? "فعال کردن حالت روشن" : "فعال کردن حالت تاریک");
+    button.title = dark ? "فعال کردن حالت روشن" : "فعال کردن حالت تاریک";
+    $("theme-label").textContent = dark ? "حالت روشن" : "حالت تاریک";
+    $("theme-icon").innerHTML = dark
+      ? '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>'
+      : '<path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z"/>';
+  }
+  function setTheme(theme) {
+    var root = document.documentElement;
+    root.setAttribute("data-theme", theme);
+    try { localStorage.setItem("drBahanehTheme", theme); } catch (e) {}
+    applySituationTheme(sitSel);
+    updateThemeButton();
+    var metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) metaTheme.setAttribute("content", theme === "dark" ? "#15182a" : "#F9EFFF");
   }
   function applySituationTheme(key) {
     var root = document.documentElement;
@@ -764,11 +809,10 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
   }
 
   applySituationTheme(sitSel);
-  if (window.matchMedia) {
-    var colorScheme = window.matchMedia("(prefers-color-scheme: dark)");
-    if (colorScheme.addEventListener) colorScheme.addEventListener("change", function () { applySituationTheme(sitSel); });
-    else if (colorScheme.addListener) colorScheme.addListener(function () { applySituationTheme(sitSel); });
-  }
+  updateThemeButton();
+  $("theme-toggle").addEventListener("click", function () {
+    setTheme(isDarkMode() ? "light" : "dark");
+  });
   buildSituationSelect();
   buildPicks($("tones"), TONE, "tone", toneSel, function (k) { toneSel = k; templateGen(); });
   $("go").addEventListener("click", generate);
