@@ -770,6 +770,11 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
   }
 
   applySituationTheme(sitSel);
+  if (window.matchMedia) {
+    var colorScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    if (colorScheme.addEventListener) colorScheme.addEventListener("change", function () { applySituationTheme(sitSel); });
+    else if (colorScheme.addListener) colorScheme.addListener(function () { applySituationTheme(sitSel); });
+  }
   buildSituationSelect();
   buildPicks($("tones"), TONE, "tone", toneSel, function (k) { toneSel = k; templateGen(); });
   $("go").addEventListener("click", generate);
