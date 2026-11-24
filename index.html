@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#D9EAFB">
+<meta name="description" content="دکتر بهانه؛ برای هر موقعیت یک عذرنامه‌ی بامزه و خلاقانه بساز.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>دکتر بهانه</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;600;700&display=swap">
 <style>
@@ -295,6 +299,8 @@ footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text
     <div class="actions">
       <button class="btn solid" id="copy" type="button">کپی بهانه</button>
       <button class="btn plain" id="again" type="button">یه بهانه‌ی دیگه</button>
+      <button class="btn plain" id="share" type="button">اشتراک‌گذاری</button>
+      <button class="btn plain" id="install" type="button" hidden>نصب دکتر بهانه</button>
     </div>
     <p class="note" id="note" role="status" aria-live="polite"></p>
 
@@ -433,6 +439,8 @@ footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text
 
   var sitSel = "late", toneSel = "formal";
   var current = null, history = [];
+  var installPrompt = null;
+  var HISTORY_KEY = "dr-bahane-history-v1";
   var sampleFn = null, aiOn = false, busy = false, lastMode = "tpl";
 
   function fa(n) { return Number(n).toLocaleString("fa-IR", { useGrouping: false }); }
@@ -485,7 +493,8 @@ footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text
   }
 
   function addHistory(rx) {
-    history = [rx].concat(history.filter(function (h) { return h.text !== rx.text; })).slice(0, 6);
+    history = [rx].concat(history.filter(function (h) { return h.text !== rx.text; })).slice(0, 12);
+    try { localStorage.setItem(HISTORY_KEY, JSON.stringify(history)); } catch (e) {}
     var ul = $("hist-list");
     ul.textContent = "";
     history.forEach(function (h) {
@@ -618,6 +627,7 @@ footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text
 
   var copyTimer;
   function copy() {
+    if (!current) return;
     var text = current.text;
     var btn = $("copy");
     function done(ok) {
@@ -638,6 +648,41 @@ footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text
   $("go").addEventListener("click", generate);
   $("again").addEventListener("click", again);
   $("copy").addEventListener("click", copy);
+  $("share").addEventListener("click", function () {
+    if (!current) return;
+    var text = current.text + "\\n\\n— دکتر بهانه";
+    if (navigator.share) {
+      navigator.share({ title: "نسخه‌ی دکتر بهانه", text: text }).catch(function (e) {
+        if (e && e.name !== "AbortError") note("اشتراک‌گذاری انجام نشد؛ می‌تونی متن رو کپی کنی.");
+      });
+    } else {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { note("متن آماده‌ی اشتراک‌گذاری کپی شد."); }, function () { note("امکان اشتراک‌گذاری در این مرورگر فعال نیست."); });
+      } else {
+        note("امکان اشتراک‌گذاری در این مرورگر فعال نیست.");
+      }
+    }
+  });
+
+  window.addEventListener("beforeinstallprompt", function (event) {
+    event.preventDefault();
+    installPrompt = event;
+    $("install").hidden = false;
+  });
+  $("install").addEventListener("click", async function () {
+    if (!installPrompt) return;
+    installPrompt.prompt();
+    try {
+      var choice = await installPrompt.userChoice;
+      if (choice && choice.outcome === "accepted") note("دکتر بهانه به دستگاهت اضافه شد.");
+    } catch (e) {}
+    installPrompt = null;
+    $("install").hidden = true;
+  });
+  window.addEventListener("appinstalled", function () {
+    $("install").hidden = true;
+    note("دکتر بهانه با موفقیت نصب شد.");
+  });
 
   var det = $("details");
   function updateCount() { $("count").textContent = fa(det.value.length) + " از " + fa(300); }
@@ -651,7 +696,34 @@ footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text
     $("rx-date").textContent = new Date().toLocaleDateString("fa-IR", { year: "numeric", month: "long", day: "numeric" });
   } catch (e) { $("rx-date").textContent = ""; }
 
+  try {
+    var saved = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+    if (Array.isArray(saved)) {
+      history = saved.filter(function (x) { return x && typeof x.text === "string"; }).slice(0, 12);
+      if (history.length) {
+        var ul = $("hist-list");
+        history.forEach(function (h) {
+          var li = document.createElement("li");
+          var b = document.createElement("button");
+          b.type = "button";
+          b.textContent = (h.label || "بهانه‌ی قبلی") + " ← " + h.text;
+          b.addEventListener("click", function () { render(h); $("rx").scrollIntoView({ behavior: "smooth", block: "center" }); });
+          li.appendChild(b); ul.appendChild(li);
+        });
+        $("hist").hidden = history.length < 2;
+      }
+    }
+  } catch (e) {}
+
   templateGen();
+
+  if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("./sw.js").catch(function () {
+        note("حالت آفلاین در این مرورگر فعال نشد.");
+      });
+    });
+  }
 
   try {
     if (window.claude && typeof window.claude.use === "function") {
