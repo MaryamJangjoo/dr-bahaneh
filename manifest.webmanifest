@@ -9,11 +9,11 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#F1ECFF",
-  "theme_color": "#F1ECFF",
+  "background_color": "#F9EFFF",
+  "theme_color": "#F9EFFF",
   "icons": [
     {
-      "src": "./icon.svg",
+      "src": "./icon.svg?v=3",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
