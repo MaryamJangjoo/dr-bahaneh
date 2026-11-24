@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7f5f1"><meta name="description" content="دکتر بهانه؛ برای هر موقعیتی یک بهانه بامزه بساز، کپی کن و با دوستانت به اشتراک بگذار."><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>دکتر بهانه</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;600;700&display=swap">
@@ -38,6 +38,7 @@ h1 span{color:var(--primary)}
 .sub{margin:3px 0 0;color:var(--muted);font-size:.92rem;font-weight:500}
 .top-note{display:flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);font-size:.82rem;white-space:nowrap}
 .top-note i{width:8px;height:8px;border-radius:50%;background:var(--muted);display:inline-block;flex:none}.top-note.online i{background:var(--green)}.top-note.offline i{background:var(--coral)}
+.install-btn{border:1px solid var(--primary);background:var(--primary-soft);color:var(--primary-dark);border-radius:999px;padding:9px 14px;font:700 .82rem var(--font);cursor:pointer;white-space:nowrap}.install-btn[hidden]{display:none}
 .intro{padding:19px 22px;border:1px solid #e9e7ff;background:var(--primary-soft);border-radius:20px;display:flex;align-items:center;justify-content:space-between;gap:15px}
 :root[data-theme="dark"] .intro{border-color:var(--line)}
 .intro p{margin:0;font-size:.94rem;color:var(--muted)}
@@ -133,6 +134,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
       </div>
     </div>
     <div class="top-note" id="connection-status"><i></i><span id="connection-label">آماده‌ی اتصال به هوش مصنوعی</span></div>
+    <button class="install-btn" id="install-app" type="button" hidden>⬇ نصب برنامه</button>
   </header>
 
   <div class="intro">
@@ -196,6 +198,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
       <div class="actions">
         <button class="btn solid" id="copy" type="button">📋 کپی بهانه</button>
         <button class="btn plain" id="again" type="button">🔄 یکی دیگه</button>
+        <button class="btn plain" id="share" type="button">↗ اشتراک‌گذاری</button>
       </div>
       <p class="note" id="note" role="status" aria-live="polite"></p>
 
@@ -295,6 +298,49 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
         "فراموش نکرده بودم؛ فقط داشتم تمرین می‌کردم که یادم نیاد تا غافلگیرت کنم"
       ]
     }
+    },
+    exam: {
+      label: "برای امتحان آماده نیستم",
+      lead: "می‌دونم باید آماده می‌بودم، اما ",
+      serious: ["چند روز اخیر درگیر یک مسئله‌ی پیش‌بینی‌نشده شدم و نتونستم طبق برنامه پیش برم", "بخشی از مطالب برام مبهم موند و برای اینکه پاسخ‌هام حدسی نباشه به زمان بیشتری نیاز دارم", "برنامه‌ی مطالعه‌ام به‌هم ریخت و نتونستم مرور نهایی رو انجام بدم"],
+      funny: ["جزوه رو باز کردم ولی ظاهراً جزوه هنوز منو به‌عنوان صاحبش قبول نکرده", "مطالب رو خوندم اما مغزم موقع امتحان درخواست به‌روزرسانی داده", "با کتاب قرار گذاشته بودم دیشب همدیگه رو ببینیم؛ کتاب نیومد"]
+    },
+    birthday: {
+      label: "تولدت یادم رفت",
+      lead: "از ته دل معذرت می‌خوام که دیر یادم افتاد؛ ",
+      serious: ["این چند روز ذهنم خیلی درگیر بود و تاریخ از دستم در رفت", "یادم بود که این روز مهمه اما روزش رو اشتباه ثبت کرده بودم", "باید زودتر تبریک می‌گفتم و بابت این کوتاهی واقعاً متأسفم"],
+      funny: ["تقویمم امروز تصمیم گرفت با من همکاری نکنه", "ذهنم تاریخ رو ذخیره کرده بود ولی دکمه‌ی یادآوری رو نزده بود", "تبریکم در راهه؛ فقط از مسیر طولانیِ حافظه عبور می‌کنه"]
+    },
+    cancel: {
+      label: "می‌خوام قرار رو کنسل کنم",
+      lead: "بابت تغییر برنامه واقعاً متأسفم؛ ",
+      serious: ["یک کار ضروری پیش اومده که باید همین امروز رسیدگی کنم", "امروز انرژی و تمرکز کافی ندارم و نمی‌خوام با حال نامناسب بیام", "برنامه‌ی خانوادگی پیش‌بینی‌نشده‌ای برام پیش اومده"],
+      funny: ["باتری اجتماعی‌ام روی یک درصد مونده و شارژرم همراهم نیست", "امروز حتی کفش‌هام هم برای بیرون رفتن اعلام آمادگی نکردن", "بدنم درخواست مرخصی داده و فعلاً در حال بررسی پرونده‌اش هستم"]
+    },
+    broke: {
+      label: "پول بیرون رفتن ندارم",
+      lead: "این بار باید از پیشنهادت بگذرم؛ ",
+      serious: ["این ماه باید هزینه‌هام رو مدیریت کنم و فعلاً امکانش رو ندارم", "چند پرداخت ضروری دارم و بهتره فعلاً برنامه‌ی کم‌هزینه‌تری بچینیم", "بودجه‌ام برای این هفته محدود شده"],
+      funny: ["حساب بانکیم فعلاً در حالت مراقبت‌های ویژه‌ست", "کارت بانکی‌ام گفته تا اطلاع ثانوی فقط نگاهش کنم", "پولم رفته دنبال آرزوهاش و هنوز برنگشته"]
+    },
+    phone: {
+      label: "گوشیم خاموش بود",
+      lead: "ببخشید که در دسترس نبودم؛ ",
+      serious: ["شارژ گوشی تموم شده بود و به برق دسترسی نداشتم", "گوشی برای مدتی مشکل نرم‌افزاری پیدا کرده بود", "در جلسه بودم و گوشی رو روی حالت بی‌صدا گذاشته بودم"],
+      funny: ["گوشیم تصمیم گرفته بود چند ساعت از زندگی دیجیتال فاصله بگیره", "باتری با من قهر کرد و بدون خداحافظی خاموش شد", "گوشی رفت توی حالت مراقبه و من هم مزاحمش نشدم"]
+    },
+    overslept: {
+      label: "خواب موندم",
+      lead: "ببخشید که خواب موندم؛ ",
+      serious: ["دیشب به‌خاطر خستگی زیاد خوابم سنگین شد", "آلارم گوشی درست عمل نکرد و متوجه زمان نشدم", "چند شب کم‌خوابی داشتم و امروز بدنم بیشتر از حد انتظار استراحت کرد"],
+      funny: ["تختم منو گروگان گرفته بود و مذاکرات طول کشید", "با بالش وارد مذاکره شدم ولی طرف مقابل کوتاه نیومد", "ساعت زنگ زد؛ من در خواب درخواست تمدید جلسه دادم"]
+    },
+    call: {
+      label: "حوصله‌ی تماس ندارم",
+      lead: "الان نمی‌تونم تماس بگیرم؛ ",
+      serious: ["الان تمرکز کافی برای صحبت ندارم؛ اگر موافقی پیام بدیم", "در موقعیتی هستم که نمی‌تونم راحت صحبت کنم", "کمی نیاز دارم تنها باشم و بعداً با خیال راحت تماس می‌گیرم"],
+      funny: ["صدای من فعلاً در مرخصی استعلاجیه", "مغزم روی حالت تایپ تنظیم شده نه مکالمه", "امروز قابلیت مکالمه‌ی صوتی من در دست تعمیره"]
+    }
   };
 
   var TONE = {
@@ -387,7 +433,8 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
   }
 
   function addHistory(rx) {
-    history = [rx].concat(history.filter(function (h) { return h.text !== rx.text; })).slice(0, 6);
+    history = [rx].concat(history.filter(function (h) { return h.text !== rx.text; })).slice(0, 12);
+    try { localStorage.setItem("drBahanehHistory", JSON.stringify(history)); } catch (e) {}
     var ul = $("hist-list");
     ul.textContent = "";
     history.forEach(function (h) {
@@ -524,6 +571,41 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
   }
 
   var copyTimer;
+  function share() {
+    if (!current) return;
+    var shareData = { title: "دکتر بهانه", text: current.text + "\\n\\nساخته‌شده با دکتر بهانه" };
+    if (navigator.share) {
+      navigator.share(shareData).then(function () { note("بهانه به اشتراک گذاشته شد."); }).catch(function (e) {
+        if (e && e.name !== "AbortError") note("اشتراک‌گذاری انجام نشد؛ می‌تونی متن رو کپی کنی.");
+      });
+    } else {
+      var ok = fallbackCopy(shareData.text);
+      note(ok ? "متن بهانه کپی شد؛ حالا می‌تونی برای دیگران بفرستی." : "امکان اشتراک‌گذاری در این مرورگر وجود نداره.");
+    }
+  }
+
+  var installPrompt = null;
+  var installButton = $("install-app");
+  window.addEventListener("beforeinstallprompt", function (event) {
+    event.preventDefault();
+    installPrompt = event;
+    installButton.hidden = false;
+  });
+  installButton.addEventListener("click", async function () {
+    if (!installPrompt) {
+      note("برای نصب، از منوی مرورگر گزینه‌ی «افزودن به صفحه اصلی» رو انتخاب کن.");
+      return;
+    }
+    installPrompt.prompt();
+    try { await installPrompt.userChoice; } catch (e) {}
+    installPrompt = null;
+    installButton.hidden = true;
+  });
+  window.addEventListener("appinstalled", function () {
+    installButton.hidden = true;
+    note("دکتر بهانه به صفحه‌ی برنامه‌هات اضافه شد 💛");
+  });
+
   function copy() {
     var text = current.text;
     var btn = $("copy");
@@ -545,6 +627,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
   $("go").addEventListener("click", generate);
   $("again").addEventListener("click", again);
   $("copy").addEventListener("click", copy);
+  $("share").addEventListener("click", share);
 
   var det = $("details");
   function updateCount() { $("count").textContent = fa(det.value.length) + " از " + fa(300); }
@@ -558,7 +641,22 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     $("rx-date").textContent = new Date().toLocaleDateString("fa-IR", { year: "numeric", month: "long", day: "numeric" });
   } catch (e) { $("rx-date").textContent = ""; }
 
+  try {
+    var savedHistory = JSON.parse(localStorage.getItem("drBahanehHistory") || "[]");
+    if (Array.isArray(savedHistory)) {
+      savedHistory.slice(0, 12).reverse().forEach(function (item) {
+        if (item && typeof item.text === "string" && typeof item.label === "string") addHistory(item);
+      });
+    }
+  } catch (e) {}
+
   templateGen();
+
+  if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("./sw.js").catch(function () {});
+    });
+  }
 
   fetch("/api/health")
     .then(function (r) { if (!r.ok) throw new Error("offline"); return r.json(); })
