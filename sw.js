@@ -1,4 +1,4 @@
-const CACHE_NAME = "dr-bahane-v3";
+const CACHE_NAME = "dr-bahane-v4";
 const APP_SHELL = [
   "./",
   "./index.html",
