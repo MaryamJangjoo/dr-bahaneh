@@ -1,4 +1,24 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7f5f1"><meta name="description" content="دکتر بهانه؛ برای هر موقعیتی یک بهانه بامزه بساز، کپی کن و با دوستانت به اشتراک بگذار."><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg?v=3" type="image/svg+xml"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#F9EFFF"><meta name="description" content="دکتر بهانه؛ برای هر موقعیتی یک بهانه بامزه بساز، کپی کن و با دوستانت به اشتراک بگذار."><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg?v=3" type="image/svg+xml"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+#launch-splash{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:linear-gradient(145deg,#F9EFFF 0%,#E6D9FF 100%);opacity:1;visibility:visible;transition:opacity .32s ease,visibility .32s ease}
+#launch-splash.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
+.launch-inner{display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;color:#6F58AA}
+.launch-cloud{width:132px;height:132px;object-fit:contain;filter:drop-shadow(0 12px 22px rgba(113,88,170,.15));animation:cloud-float 1.8s ease-in-out infinite}
+.launch-name{margin:0;font:400 2.15rem/1.2 Lalezar,Tahoma,sans-serif;color:#6F58AA}
+.launch-caption{margin:0;font:500 .85rem/1.8 Vazirmatn,Tahoma,sans-serif;color:#82749B}
+.launch-dots{display:flex;gap:5px;margin-top:8px}
+.launch-dots i{width:6px;height:6px;border-radius:50%;background:#8C73C9;animation:launch-dot .8s ease-in-out infinite alternate}
+.launch-dots i:nth-child(2){animation-delay:.18s}.launch-dots i:nth-child(3){animation-delay:.36s}
+@keyframes cloud-float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
+@keyframes launch-dot{to{opacity:.3;transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){.launch-cloud,.launch-dots i{animation:none!important}}</style></head><body>
+<div id="launch-splash" role="status" aria-label="دکتر بهانه در حال آماده شدن">
+  <div class="launch-inner">
+    <img class="launch-cloud" src="icon.svg?v=3" alt="">
+    <p class="launch-name">دکتر بهانه</p>
+    <p class="launch-caption">داریم نسخه‌ات رو آماده می‌کنیم...</p>
+    <span class="launch-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+  </div>
+</div>
 <title>دکتر بهانه</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;600;700&display=swap">
@@ -6,10 +26,10 @@
 
 :root{
   color-scheme:light;
-  --bg:#f7f5f1;--surface:#fffefa;--surface-soft:#f4f1eb;--ink:#303044;
-  --muted:#777486;--line:#e9e4dc;--primary:#7167b8;--primary-dark:#554d91;
-  --primary-soft:color-mix(in srgb,var(--primary) 12%,var(--surface));--coral:var(--primary);--coral-soft:var(--primary-soft);
-  --yellow:var(--primary-soft);--green:#57977e;--shadow:0 12px 34px rgba(55,48,38,.055);
+  --bg:#FBF8FF;--surface:#FFFFFF;--surface-soft:#F7F2FF;--ink:#403650;
+  --muted:#81758F;--line:#E9DFF5;--primary:#8C73C9;--primary-dark:#6F58AA;
+  --primary-soft:#F0E9FF;--coral:#F4A5B8;--coral-soft:#FFF0F4;
+  --yellow:#FFF1C9;--green:#57977e;--shadow:0 12px 34px rgba(91,70,130,.075);
   --radius:24px;--font:"Vazirmatn",Tahoma,system-ui,sans-serif;
   --font-display:"Lalezar","Vazirmatn",Tahoma,sans-serif;
 }
@@ -218,6 +238,14 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
 
 <script>
 (function () {
+  var launchSplash = document.getElementById("launch-splash");
+  if (launchSplash) {
+    window.setTimeout(function () {
+      launchSplash.classList.add("is-leaving");
+      window.setTimeout(function () { launchSplash.remove(); }, 380);
+    }, 1600);
+  }
+
   var SIT = {
     late: {
       label: "دیر رسیدم",
@@ -403,9 +431,25 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     broke: ["#5d987b","#3e7058"], phone: ["#668eaa","#45677f"],
     overslept: ["#b47e87","#86565f"], call: ["#7d8bba","#596796"]
   };
+  // لایت مود از رنگ‌های خود ابر استفاده می‌کند؛ دارک مود دقیقاً پالت قبلی را نگه می‌دارد.
+  var CLOUD_LIGHT_THEMES = {
+    late: ["#8C73C9","#6F58AA"], deadline: ["#9580D0","#715CB0"],
+    party: ["#D99AB5","#B77591"], reply: ["#A18CD5","#7965B6"],
+    forgot: ["#B09BDF","#8872C3"], exam: ["#8875C8","#6854A6"],
+    birthday: ["#D8A2B8","#AE7892"], cancel: ["#9B88CA","#7560AE"],
+    broke: ["#9A88CB","#7460AB"], phone: ["#8999C9","#6576A8"],
+    overslept: ["#D58EAA","#B46C89"], call: ["#927DCE","#705BAF"]
+  };
+  function isDarkMode() {
+    var explicit = document.documentElement.getAttribute("data-theme");
+    if (explicit === "dark") return true;
+    if (explicit === "light") return false;
+    return !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  }
   function applySituationTheme(key) {
-    var colors = SITUATION_THEMES[key] || SITUATION_THEMES.late;
     var root = document.documentElement;
+    var colors = isDarkMode() ? (SITUATION_THEMES[key] || SITUATION_THEMES.late) :
+      (CLOUD_LIGHT_THEMES[key] || CLOUD_LIGHT_THEMES.late);
     root.dataset.situation = key;
     root.style.setProperty("--primary", colors[0]);
     root.style.setProperty("--primary-dark", colors[1]);
