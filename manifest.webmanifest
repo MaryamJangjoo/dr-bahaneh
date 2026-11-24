@@ -1,0 +1,26 @@
+{
+  "id": "./",
+  "name": "دکتر بهانه",
+  "short_name": "دکتر بهانه",
+  "description": "عذرنامه‌ی رسمی با تأییدیه‌ی خودمونی؛ برای هر موقعیت یک جواب خلاقانه.",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#D9EAFB",
+  "theme_color": "#D9EAFB",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": [
+    "entertainment",
+    "lifestyle"
+  ]
+}
