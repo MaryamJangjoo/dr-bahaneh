@@ -8,8 +8,8 @@
   color-scheme:light;
   --bg:#f7f5f1;--surface:#fffefa;--surface-soft:#f4f1eb;--ink:#303044;
   --muted:#777486;--line:#e9e4dc;--primary:#7167b8;--primary-dark:#554d91;
-  --primary-soft:#efedf8;--coral:#df8278;--coral-soft:#fbefeb;
-  --yellow:#f2dfad;--green:#57977e;--shadow:0 12px 34px rgba(55,48,38,.055);
+  --primary-soft:color-mix(in srgb,var(--primary) 12%,var(--surface));--coral:var(--primary);--coral-soft:var(--primary-soft);
+  --yellow:var(--primary-soft);--green:#57977e;--shadow:0 12px 34px rgba(55,48,38,.055);
   --radius:24px;--font:"Vazirmatn",Tahoma,system-ui,sans-serif;
   --font-display:"Lalezar","Vazirmatn",Tahoma,sans-serif;
 }
@@ -31,7 +31,7 @@ button{ -webkit-tap-highlight-color:transparent}
 .shell{width:min(1060px,100%);margin:auto;display:flex;flex-direction:column;gap:26px}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:18px}
 .brand{display:flex;align-items:center;gap:15px;min-width:0}
-.mascot-wrap{width:66px;height:66px;flex:none;display:grid;place-items:center;border-radius:22px;background:var(--yellow);transform:rotate(-4deg)}
+.mascot-wrap{width:66px;height:66px;flex:none;display:grid;place-items:center;border-radius:22px;background:var(--primary-soft);transform:rotate(-4deg);transition:background .2s}
 .mascot{width:58px;height:58px}
 h1{margin:0;font:400 clamp(2rem,5vw,2.8rem)/1.2 var(--font-display);letter-spacing:-.5px}
 h1 span{color:var(--primary)}
@@ -39,7 +39,7 @@ h1 span{color:var(--primary)}
 .top-note{display:flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);font-size:.82rem;white-space:nowrap}
 .top-note i{width:8px;height:8px;border-radius:50%;background:var(--muted);display:inline-block;flex:none}.top-note.online i{background:var(--green)}.top-note.offline i{background:var(--coral)}
 .install-btn{border:1px solid var(--primary);background:var(--primary-soft);color:var(--primary-dark);border-radius:999px;padding:9px 14px;font:700 .82rem var(--font);cursor:pointer;white-space:nowrap}.install-btn[hidden]{display:none}
-.intro{padding:19px 22px;border:1px solid #e9e7ff;background:var(--primary-soft);border-radius:20px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.intro{padding:19px 22px;border:1px solid color-mix(in srgb,var(--primary) 22%,var(--line));background:var(--primary-soft);border-radius:20px;display:flex;align-items:center;justify-content:space-between;gap:15px}
 :root[data-theme="dark"] .intro{border-color:var(--line)}
 .intro p{margin:0;font-size:.94rem;color:var(--muted)}
 .intro strong{color:var(--ink)}
@@ -76,7 +76,7 @@ textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in srg
 .result-panel{position:static}
 .result-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
 .result-title{display:flex;align-items:center;gap:10px}
-.result-icon{width:38px;height:38px;border-radius:13px;background:var(--coral-soft);display:grid;place-items:center;font-size:1.15rem}
+.result-icon{width:38px;height:38px;border-radius:13px;background:var(--primary-soft);display:grid;place-items:center;font-size:1.15rem}
 .result-title h2{font:400 1.4rem/1.4 var(--font-display);margin:0}
 .paper-meta{color:var(--muted);font-size:.72rem;white-space:nowrap}
 .paper{position:relative;overflow:hidden;background:var(--surface-soft);border:1px solid var(--line);border-radius:19px;padding:22px 21px 18px}
@@ -94,7 +94,7 @@ textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in srg
 .paper.loading .lines{opacity:.35}
 .sign{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
 .sign-line{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:.8rem}
-.stamp{border:2px solid var(--coral);color:var(--coral);border-radius:10px;padding:4px 12px;text-align:center;line-height:1.35;font:400 1.08rem var(--font-display);transform:rotate(-4deg)}
+.stamp{border:2px solid var(--primary);color:var(--primary);border-radius:10px;padding:4px 12px;text-align:center;line-height:1.35;font:400 1.08rem var(--font-display);transform:rotate(-4deg)}
 .stamp small{display:block;font:700 .68rem var(--font)}
 .stamp.hit{animation:thump .32s ease-out}
 @keyframes thump{from{transform:rotate(-4deg) scale(1.4);opacity:0}to{transform:rotate(-4deg) scale(1);opacity:1}}
@@ -395,6 +395,23 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     "درخواست مدرک"
   ];
 
+  var SITUATION_THEMES = {
+    late: ["#b77b55","#805235"], deadline: ["#647db8","#465d96"],
+    party: ["#c47a9b","#92516f"], reply: ["#559b9a","#347674"],
+    forgot: ["#9a83bd","#705895"], exam: ["#648cbd","#45678f"],
+    birthday: ["#c18a4e","#8d622e"], cancel: ["#8b8e9e","#626575"],
+    broke: ["#5d987b","#3e7058"], phone: ["#668eaa","#45677f"],
+    overslept: ["#b47e87","#86565f"], call: ["#7d8bba","#596796"]
+  };
+  function applySituationTheme(key) {
+    var colors = SITUATION_THEMES[key] || SITUATION_THEMES.late;
+    var root = document.documentElement;
+    root.dataset.situation = key;
+    root.style.setProperty("--primary", colors[0]);
+    root.style.setProperty("--primary-dark", colors[1]);
+    root.style.setProperty("--primary-soft", "color-mix(in srgb," + colors[0] + " 12%,var(--surface))");
+  }
+
   var sitSel = "late", toneSel = "formal";
   var current = null, history = [];
   var aiOn = true, busy = false, lastMode = "tpl";
@@ -429,6 +446,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     function choose(key) {
       if (!SIT[key]) return;
       sitSel = key;
+      applySituationTheme(key);
       label.textContent = SIT[key].label;
       Array.prototype.forEach.call(menu.children, function (item) {
         item.setAttribute("aria-selected", item.dataset.value === key ? "true" : "false");
@@ -494,7 +512,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     for (var i = 0; i < 6; i++) {
       var text = pick(t.open) + s.lead + pick(pool) + "." + pick(t.close);
       rx = { text: text, belief: 55 + Math.floor(Math.random() * 42), usage: pick(USAGE), side: pick(SIDE),
-             no: rxNo(), label: s.label + " · " + t.label, sub: s.label, toneTitle: toneTitle(toneSel), src: "قالب آماده" };
+             no: rxNo(), label: s.label + " · " + t.label, sub: s.label, situation: sitSel, toneTitle: toneTitle(toneSel), src: "قالب آماده" };
       if (!current || rx.text !== current.text) break;
     }
     return rx;
@@ -502,6 +520,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
 
   function render(rx) {
     current = rx;
+    if (rx.situation && SIT[rx.situation]) applySituationTheme(rx.situation);
     $("excuse").textContent = rx.text;
     $("belief-n").textContent = fa(rx.belief) + "٪";
     $("usage").textContent = rx.usage;
@@ -577,7 +596,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     var usage = typeof d.usage === "string" && d.usage.trim() && d.usage.length <= 140 ? d.usage.trim() : pick(USAGE);
     var side = typeof d.side === "string" && d.side.trim() && d.side.length <= 120 ? d.side.trim() : pick(SIDE);
     return { text: text, belief: b, usage: usage, side: side, no: rxNo(),
-             label: SIT[sitSel].label + " · " + TONE[toneSel].label, sub: SIT[sitSel].label, toneTitle: toneTitle(toneSel), src: "هوش مصنوعی" };
+             label: SIT[sitSel].label + " · " + TONE[toneSel].label, sub: SIT[sitSel].label, situation: sitSel, toneTitle: toneTitle(toneSel), src: "هوش مصنوعی" };
   }
 
   function goLabel() { return "با هوش مصنوعی بهانه بساز"; }
@@ -706,6 +725,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     }
   }
 
+  applySituationTheme(sitSel);
   buildSituationSelect();
   buildPicks($("tones"), TONE, "tone", toneSel, function (k) { toneSel = k; templateGen(); });
   $("go").addEventListener("click", generate);
