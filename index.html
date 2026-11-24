@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>دکتر بهانه</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a single column on a dotted sky-blue desk. Sticker-style choices on top, a big red button, then the result as a ruled notebook page taped to the desk: subject line, excuse in ballpoint-blue, two P.S. lines, a signature squiggle and a red rubber stamp that carries the believability score. */
+:root {
+  --bg: #D9EAFB;
+  --dot: #B8D3F0;
+  --paper: #FFFFFF;
+  --paper-edge: #C6DBF2;
+  --paper-shadow: 0 12px 28px rgba(18, 28, 80, 0.16);
+  --rule: #D3E4F7;
+  --margin: #F2A3A8;
+  --ink: #1D2B6B;
+  --muted: #4A5993;
+  --hi: #FFE066;
+  --hi-ink: #1D2B6B;
+  --hl: #FFE066;
+  --red: #D63B42;
+  --red-ink: #FFFFFF;
+  --red-deep: #A82A30;
+  --stamp: #D63B42;
+  --tape: rgba(255, 214, 70, 0.82);
+  --sweat: #6EBBFF;
+  --font: "Vazirmatn", Tahoma, system-ui, sans-serif;
+  --font-display: "Lalezar", "Vazirmatn", Tahoma, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10162B;
+    --dot: #1C2648;
+    --paper: #1A2142;
+    --paper-edge: #2E3A6C;
+    --paper-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+    --rule: #2A3566;
+    --margin: #8A4A5A;
+    --ink: #E6ECFF;
+    --muted: #A5B2E6;
+    --hi: #FFE066;
+    --hi-ink: #1D2B6B;
+    --hl: rgba(255, 224, 102, 0.32);
+    --red: #FF7B80;
+    --red-ink: #2A0B0D;
+    --red-deep: #C2474D;
+    --stamp: #FF8E92;
+    --tape: rgba(255, 224, 102, 0.55);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10162B;
+  --dot: #1C2648;
+  --paper: #1A2142;
+  --paper-edge: #2E3A6C;
+  --paper-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+  --rule: #2A3566;
+  --margin: #8A4A5A;
+  --ink: #E6ECFF;
+  --muted: #A5B2E6;
+  --hi: #FFE066;
+  --hi-ink: #1D2B6B;
+  --hl: rgba(255, 224, 102, 0.32);
+  --red: #FF7B80;
+  --red-ink: #2A0B0D;
+  --red-deep: #C2474D;
+  --stamp: #FF8E92;
+  --tape: rgba(255, 224, 102, 0.55);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--dot) 1.6px, transparent 1.8px);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.8;
+  direction: rtl;
+  padding-block: 34px 52px;
+  padding-left: max(18px, env(safe-area-inset-left, 0px));
+  padding-right: max(18px, env(safe-area-inset-right, 0px));
+}
+.shell { max-width: 600px; margin-inline: auto; display: flex; flex-direction: column; gap: 30px; }
+
+header { display: flex; align-items: center; gap: 14px; }
+.mascot { flex: none; width: 70px; height: 70px; transform: rotate(-6deg); }
+h1 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(2.5rem, 10vw, 3.4rem); line-height: 1.15; }
+h1 span { background: linear-gradient(transparent 58%, var(--hl) 58%, var(--hl) 92%, transparent 92%); padding-inline: 6px; }
+.sub { margin: 0; color: var(--muted); font-size: 0.97rem; font-weight: 500; }
+
+.stack { display: flex; flex-direction: column; gap: 26px; }
+.field { border: 0; padding: 0; margin: 0; min-width: 0; }
+.field > legend, .field > label.lbl { padding: 0; margin-bottom: 10px; font-family: var(--font-display); font-size: 1.3rem; line-height: 1.4; display: block; }
+.field .opt { font-family: var(--font); font-size: 0.85rem; color: var(--muted); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 10px 8px; }
+.pick { position: relative; }
+.pick input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; z-index: 1; }
+.pick label {
+  display: block; padding: 4px 16px; border-radius: 999px;
+  border: 2px solid var(--ink); background: var(--paper); color: var(--ink);
+  box-shadow: 0 3px 0 var(--ink);
+  font-size: 0.95rem; font-weight: 600; line-height: 1.8;
+  transition: transform 0.12s, background 0.12s;
+}
+.pick:nth-child(odd) label { transform: rotate(-1.2deg); }
+.pick:nth-child(even) label { transform: rotate(1deg); }
+.pick:hover label { transform: translateY(-2px) rotate(0deg); }
+.pick input:checked + label { background: var(--hi); color: var(--hi-ink); transform: rotate(0deg) scale(1.05); box-shadow: 0 1px 0 var(--ink); }
+.pick input:focus-visible + label { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+textarea {
+  display: block; width: 100%; min-height: 92px; resize: vertical;
+  font-family: inherit; font-size: 1rem; line-height: 1.8; color: var(--ink);
+  background: var(--paper); border: 2px solid var(--ink); border-radius: 16px; padding: 10px 14px;
+  box-shadow: 0 3px 0 var(--ink);
+}
+textarea::placeholder { color: var(--muted); opacity: 1; }
+textarea:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.under { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; color: var(--muted); font-size: 0.82rem; font-weight: 500; }
+
+.go {
+  width: 100%;
+  font-family: var(--font-display); font-size: 1.6rem; line-height: 1.5;
+  background: var(--red); color: var(--red-ink);
+  border: 0; border-radius: 18px;
+  box-shadow: 0 6px 0 var(--red-deep);
+  padding: 8px 24px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.go:hover:not(:disabled) { transform: translateY(1px); box-shadow: 0 5px 0 var(--red-deep); }
+.go:active:not(:disabled) { transform: translateY(5px); box-shadow: 0 1px 0 var(--red-deep); }
+.go:disabled { opacity: 0.8; cursor: progress; }
+.go:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+.busy::before {
+  content: ""; width: 18px; height: 18px; border-radius: 50%;
+  border: 3px solid currentColor; border-inline-end-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.paper {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--paper-edge);
+  border-radius: 6px 6px 16px 16px;
+  box-shadow: var(--paper-shadow);
+  padding: 30px 22px 24px 22px;
+  padding-inline-start: 62px;
+  transform: rotate(-0.5deg);
+  margin-top: 6px;
+}
+.paper::before { content: ""; position: absolute; inset-block: 0; inset-inline-start: 46px; width: 2px; background: var(--margin); }
+.paper::after {
+  content: ""; position: absolute; inset-block: 0; inset-inline-start: 12px; width: 20px;
+  background:
+    radial-gradient(circle at 50% 14%, var(--bg) 0 6px, transparent 6.5px),
+    radial-gradient(circle at 50% 50%, var(--bg) 0 6px, transparent 6.5px),
+    radial-gradient(circle at 50% 86%, var(--bg) 0 6px, transparent 6.5px);
+}
+.tape { position: absolute; top: -14px; left: 50%; width: 104px; height: 28px; background: var(--tape); transform: translateX(-50%) rotate(-3deg); }
+
+.paper-head { display: flex; justify-content: space-between; align-items: baseline; gap: 2px 12px; flex-wrap: wrap; }
+.paper-head h2 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 1.55rem; line-height: 1.4; }
+.paper-meta { color: var(--muted); font-size: 0.8rem; font-weight: 500; }
+.src { display: inline-block; margin-inline-start: 8px; padding: 0 10px; border-radius: 999px; background: var(--hi); color: var(--hi-ink); font-size: 0.72rem; font-weight: 700; line-height: 1.7; vertical-align: middle; }
+
+.lines { margin-top: 10px; background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(2.2rem - 1px), var(--rule) calc(2.2rem - 1px), var(--rule) 2.2rem); transition: opacity 0.2s; }
+.lines p { margin: 0; line-height: 2.2rem; font-size: 1.08rem; }
+.lines .subject { font-weight: 700; }
+.lines .excuse { min-height: 8.8rem; }
+.lines .ps { color: var(--muted); font-size: 0.95rem; }
+.lines .ps b { color: var(--ink); }
+.lines .gap { margin-top: 2.2rem; }
+.paper.loading .lines { opacity: 0.3; }
+
+.sign { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 14px; }
+.sign-line { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 0.9rem; font-weight: 500; }
+.stamp {
+  border: 3px double var(--stamp); color: var(--stamp); border-radius: 10px;
+  padding: 2px 16px; text-align: center; line-height: 1.35;
+  font-family: var(--font-display); font-size: 1.35rem;
+  transform: rotate(-8deg);
+}
+.stamp small { display: block; font-family: var(--font); font-size: 0.78rem; font-weight: 700; }
+.stamp.hit { animation: thump 0.35s ease-out; }
+@keyframes thump { from { transform: rotate(-8deg) scale(1.7); opacity: 0; } to { transform: rotate(-8deg) scale(1); opacity: 1; } }
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  flex: 1 1 150px;
+  font-family: inherit; font-size: 0.97rem; font-weight: 700; line-height: 1.5;
+  border: 2px solid var(--ink); border-radius: 14px; padding: 9px 18px; cursor: pointer;
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.btn.solid { background: var(--ink); color: var(--paper); }
+.btn.plain { background: var(--paper); color: var(--ink); }
+.btn:hover:not(:disabled) { transform: translateY(1px); box-shadow: 0 3px 0 var(--ink); }
+.btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 0 0 var(--ink); }
+.btn:disabled { opacity: 0.6; cursor: progress; }
+.btn:focus-visible, summary:focus-visible, .hist button:focus-visible, footer a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.note { min-height: 1.7em; margin: -10px 0 0; color: var(--muted); font-size: 0.88rem; font-weight: 500; }
+
+.hist summary { cursor: pointer; font-family: var(--font-display); font-size: 1.15rem; }
+.hist ul { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.hist button {
+  width: 100%; text-align: start; font-family: inherit; font-size: 0.9rem; font-weight: 500; color: var(--ink);
+  background: var(--paper); border: 1.5px solid var(--paper-edge); border-radius: 12px; padding: 6px 14px; cursor: pointer;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;
+}
+.hist button:hover { border-color: var(--ink); }
+
+footer { color: var(--muted); font-size: 0.85rem; font-weight: 500; display: flex; flex-direction: column; gap: 2px; text-align: center; }
+footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text-decoration-color: var(--hl); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+
+@media (max-width: 420px) {
+  .paper { padding-inline-start: 56px; padding-inline-end: 16px; }
+  .paper::before { inset-inline-start: 42px; }
+  .paper::after { inset-inline-start: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stamp.hit { animation: none; }
+  .busy::before { animation-duration: 2s; }
+  .go, .btn, .pick label, .lines { transition: none; }
+}
+</style>
+
+</head>
+<body>
+<div class="shell" lang="fa" dir="rtl">
+  <header>
+    <svg class="mascot" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+      <circle cx="40" cy="42" r="30" fill="var(--hi)" stroke="var(--ink)" stroke-width="3"/>
+      <circle cx="30" cy="38" r="3.4" fill="var(--ink)"/>
+      <circle cx="50" cy="38" r="3.4" fill="var(--ink)"/>
+      <path d="M24 30 q6 -5 12 -1" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M31 53 q4 -4 8 0 t8 0" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M64 14 q6 9 0 14 q-6 -5 0 -14Z" fill="var(--sweat)" stroke="var(--ink)" stroke-width="2"/>
+    </svg>
+    <div>
+      <h1><span>دکتر بهانه</span></h1>
+      <p class="sub">عذرنامه‌ی رسمی با تأییدیه‌ی خودمونی</p>
+    </div>
+  </header>
+
+  <main class="stack">
+    <fieldset class="field">
+      <legend>چه گندی زدی؟</legend>
+      <div class="chips" id="sits"></div>
+    </fieldset>
+
+    <fieldset class="field">
+      <legend>با چه لحنی بگیم؟</legend>
+      <div class="chips" id="tones"></div>
+    </fieldset>
+
+    <div class="field" id="story-field" hidden>
+      <label class="lbl" for="details">ماجرا رو تعریف کن <span class="opt">(اختیاری)</span></label>
+      <textarea id="details" maxlength="300" placeholder="مثلاً: صبح دیر رسیدم و مدیرم دم در منتظرم بود"></textarea>
+      <div class="under"><span>هر چی بیشتر بگی، بهانه دقیق‌تر می‌شه.</span><span id="count"></span></div>
+    </div>
+
+    <button class="go" id="go" type="button">بهانه بساز</button>
+
+    <section class="paper" id="rx" aria-labelledby="res-title">
+      <div class="tape" aria-hidden="true"></div>
+      <div class="paper-head">
+        <h2 id="res-title">عذرنامه‌ی رسمی</h2>
+        <span class="paper-meta"><span id="rx-date"></span> · شماره‌ی <span id="rx-no"></span></span>
+      </div>
+      <div class="lines">
+        <p class="subject">موضوع: <span id="subj"></span><span class="src" id="src"></span></p>
+        <p class="excuse" id="excuse" aria-live="polite"></p>
+        <p class="ps gap"><b>پ.ن.</b> طرز مصرف: <span id="usage"></span></p>
+        <p class="ps"><b>پ.ن.</b> عوارض احتمالی: <span id="side"></span></p>
+      </div>
+      <div class="sign">
+        <div class="sign-line">
+          <span>امضا:</span>
+          <svg width="92" height="24" viewBox="0 0 92 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 17c8-15 12-15 14-4s6 8 12-2 10-10 14-2 8 6 16-4 12 2 22 4"/></svg>
+        </div>
+        <div class="stamp" id="stamp" aria-label="مهر تأیید">تأییدشده<small>باورپذیری <span id="belief-n"></span></small></div>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button class="btn solid" id="copy" type="button">کپی بهانه</button>
+      <button class="btn plain" id="again" type="button">یه بهانه‌ی دیگه</button>
+    </div>
+    <p class="note" id="note" role="status" aria-live="polite"></p>
+
+    <details class="hist" id="hist" hidden>
+      <summary>بهانه‌های قبلی</summary>
+      <ul id="hist-list"></ul>
+    </details>
+  </main>
+
+  <footer>
+    <span>ساخته‌شده در <a href="https://timim.ir" target="_blank" rel="noopener">timim.ir</a></span>
+    <span>بهانه‌ها برای سرگرمی‌ان. با آدم‌های مهم زندگیت صادق باش.</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var SIT = {
+    late: {
+      label: "دیر رسیدم",
+      lead: "ببخشید که دیر رسیدم؛ ",
+      serious: [
+        "آسانسور ساختمون وسط راه گیر کرد و تا آمدن تعمیرکار منتظر موندم",
+        "مسیر به‌خاطر یه تصادف زنجیره‌ای کاملاً بسته شد و چهل دقیقه توی ترافیک موندم",
+        "گوشیم شارژ نداشت و آلارمم زنگ نخورد",
+        "یه کار اداری فوری پیش اومد که نمی‌شد نیمه‌کاره ولش کنم"
+      ],
+      funny: [
+        "نقشه‌ی گوشیم منو از یه مسیر تاریخی فرستاد و فکر کنم از راه ابریشم اومدم",
+        "ماشینم امروز اعلام کرد حوصله‌ی رانندگی نداره و نیم ساعت باهاش مذاکره کردم",
+        "توی راه با یه گربه‌ی خیلی مهم قرار ملاقات اضطراری داشتم",
+        "ساعت خونمون با ساعت دنیا قهره و امروز طرف اونو گرفتم"
+      ]
+    },
+    deadline: {
+      label: "پروژه تحویل ندادم",
+      lead: "بابت تأخیر در تحویل کار شرمنده‌ام؛ ",
+      serious: [
+        "فایل اصلی کار در آخرین لحظه خراب شد و مجبور شدم بخشی رو از نو بسازم",
+        "یه بازخورد مهم دیر به دستم رسید و باید قبل از تحویل اعمالش می‌کردم",
+        "برای اینکه کیفیت کار پایین نیاد، به چند ساعت وقت بیشتر نیاز داشتم",
+        "سیستمم وسط ذخیره‌سازی هنگ کرد و باید اطلاعات رو دوباره بازیابی می‌کردم"
+      ],
+      funny: [
+        "پروژه آماده بود، ولی از ترس اینکه بی‌نقص نباشه، خودش رفت تو حالت خجالت",
+        "فایل رو فرستادم ولی فکر کنم بین دو جهان موازی گم شد",
+        "لپ‌تاپم وسط کار رفت مرخصی استعلاجی و پزشکش هنوز جواب نداده",
+        "الهام ساعت سه شب اومد و چهار صبح رفت و نصف کار تو همین فاصله جا موند"
+      ]
+    },
+    party: {
+      label: "نمی‌تونم بیام مهمونی",
+      lead: "متأسفانه نمی‌تونم بیام؛ ",
+      serious: [
+        "یه تعهد خانوادگی از قبل دارم که نمی‌تونم عقبش بندازم",
+        "این هفته خیلی خسته‌ام و می‌خوام انرژیم رو برای کار فردا نگه دارم",
+        "از صبح حالم زیاد خوب نیست و ترجیح می‌دم کسی رو اذیت نکنم",
+        "قبلاً قول دادم برای یه کار ضروری جای دیگه‌ای باشم"
+      ],
+      funny: [
+        "کاناپه‌ی من امشب جلسه‌ی فوق‌العاده داره و حضورم الزامیه",
+        "با خودم قرار گذاشتم امشب هیچ‌جا نرم و می‌خوام به قولم عمل کنم",
+        "لباسی که برای مهمونی انتخاب کرده بودم، در آخرین لحظه از حضور در جمع انصراف داد",
+        "سریال امشبم قسمت حساسشه و بدون من تموم نمی‌شه"
+      ]
+    },
+    reply: {
+      label: "دیر جواب دادم",
+      lead: "ببخشید که دیر جواب دادم؛ ",
+      serious: [
+        "پیامت رو دیدم ولی می‌خواستم با حواس جمع جواب بدم و به موقعش نرسیدم",
+        "این چند روز توی جلسه‌های پشت سرهم بودم و گوشی دستم نیومد",
+        "پیامت زیر انبوهی از پیام‌ها دفن شده بود و تازه پیداش کردم",
+        "گوشیم یه مدت روی حالت سکوت مونده بود و متوجه نشدم"
+      ],
+      funny: [
+        "پیامت رو توی ذهنم جواب دادم و فکر کنم تلپاتی‌ام اختلال داشته",
+        "گوشیم رو گذاشته بودم کنار و یادم رفت که انگشت دارم",
+        "داشتم یه جواب خیلی درخشان می‌نوشتم که سه روز طول کشید",
+        "کبوتر نامه‌رسانم امروز بیمار بود و جواب دیر رسید"
+      ]
+    },
+    forgot: {
+      label: "قولمو فراموش کردم",
+      lead: "شرمنده که یادم رفت؛ ",
+      serious: [
+        "اون روز چند کار رو هم‌زمان مدیریت می‌کردم و این مورد از قلم افتاد",
+        "یادآور تقویمم تنظیم نشده بود و به‌موقع خبردار نشدم",
+        "تاریخ رو اشتباه یادداشت کرده بودم و تازه متوجه شدم",
+        "این چند وقت فشار کاری زیاد بوده و حواسم کامل پرت شده بود"
+      ],
+      funny: [
+        "ذهن من امروز نسخه‌ی آزمایشی بود و این قول جزو بروزرسانی اخیر پاک شد",
+        "قولت رو توی یه جای امن گذاشته بودم، اونقدر امن که خودمم پیداش نکردم",
+        "مغزم ظرفیتش پر شد و مجبور شد بین قول تو و اسم همه‌ی شخصیت‌های سریال یکی رو انتخاب کنه",
+        "فراموش نکرده بودم؛ فقط داشتم تمرین می‌کردم که یادم نیاد تا غافلگیرت کنم"
+      ]
+    }
+  };
+
+  var TONE = {
+    formal: {
+      label: "رسمی", pool: "serious", ai: "رسمی و مؤدب",
+      open: ["با سلام و احترام؛ ", "با عرض ادب؛ "],
+      close: [" بابت این موضوع صمیمانه پوزش می‌خوام و از درک شما سپاسگزارم.", " امیدوارم این اتفاق خللی در برنامه‌ها ایجاد نکرده باشه؛ ممنون از صبوری‌تون."]
+    },
+    funny: {
+      label: "خنده‌دار", pool: "funny", ai: "خنده‌دار و شیطون",
+      open: ["", "یه اعتراف: "],
+      close: [" باور کن مقصر من نیستم، شرایط بود.", " دادگاه تجدیدنظر بعداً برگزار می‌شه."]
+    },
+    poetic: {
+      label: "شاعرانه", pool: "serious", ai: "شاعرانه و ادبی، با حال‌وهوای شعر فارسی",
+      open: ["ای دوست مهربان، ", "به نام خدایی که وقت را آفرید و ما را دیر رساند؛ "],
+      close: [" دل من با تو بود، اما پای من با تقدیر.", " ببخش که روزگار با برنامه‌ی من سر ناسازگاری داشت."]
+    },
+    dramatic: {
+      label: "دراماتیک", pool: "both", ai: "اغراق‌آمیز و دراماتیک، مثل فیلم‌های احساسی",
+      open: ["باور کن اگه بدونی چی کشیدم... ", "نمی‌دونی امروز بر من چی گذشت! "],
+      close: [" الان دلم می‌خواد یه گوشه بشینم و گریه کنم.", " این سنگین‌ترین روز عمرم بود."]
+    }
+  };
+
+  var USAGE = [
+    "با لحن مطمئن و نگاه مستقیم به چشم بیان شود",
+    "یک‌بار در روز مصرف شود؛ تکرار توصیه نمی‌شود",
+    "پس از ارسال، ده دقیقه گوشی را نگاه نکنید",
+    "همراه با یک لبخند کوچک و مظلوم مصرف شود"
+  ];
+  var SIDE = [
+    "بالا رفتن ابروی مخاطب",
+    "سؤال‌های پیگیری و ریزبینی",
+    "شک خفیف و لبخند مشکوک",
+    "درخواست مدرک"
+  ];
+
+  var sitSel = "late", toneSel = "formal";
+  var current = null, history = [];
+  var sampleFn = null, aiOn = false, busy = false, lastMode = "tpl";
+
+  function fa(n) { return Number(n).toLocaleString("fa-IR", { useGrouping: false }); }
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function $(id) { return document.getElementById(id); }
+
+  function buildPicks(box, items, name, selected, onPick) {
+    Object.keys(items).forEach(function (k) {
+      var wrap = document.createElement("div");
+      wrap.className = "pick";
+      var inp = document.createElement("input");
+      inp.type = "radio"; inp.name = name; inp.id = name + "-" + k; inp.value = k;
+      if (k === selected) inp.checked = true;
+      inp.addEventListener("change", function () { onPick(k); });
+      var lab = document.createElement("label");
+      lab.htmlFor = inp.id; lab.textContent = items[k].label;
+      wrap.appendChild(inp); wrap.appendChild(lab);
+      box.appendChild(wrap);
+    });
+  }
+
+  function rxNo() { return fa(1405) + "-" + fa(1000 + Math.floor(Math.random() * 9000)); }
+
+  function makeTemplate() {
+    var s = SIT[sitSel], t = TONE[toneSel];
+    var pool = t.pool === "both" ? s.serious.concat(s.funny) : s[t.pool];
+    var rx;
+    for (var i = 0; i < 6; i++) {
+      var text = pick(t.open) + s.lead + pick(pool) + "." + pick(t.close);
+      rx = { text: text, belief: 55 + Math.floor(Math.random() * 42), usage: pick(USAGE), side: pick(SIDE),
+             no: rxNo(), label: s.label + " · " + t.label, sub: s.label, src: "قالب آماده" };
+      if (!current || rx.text !== current.text) break;
+    }
+    return rx;
+  }
+
+  function render(rx) {
+    current = rx;
+    $("excuse").textContent = rx.text;
+    $("belief-n").textContent = fa(rx.belief) + "٪";
+    $("usage").textContent = rx.usage;
+    $("side").textContent = rx.side;
+    $("rx-no").textContent = rx.no;
+    $("subj").textContent = rx.sub;
+    $("src").textContent = rx.src;
+    var st = $("stamp");
+    st.classList.remove("hit");
+    void st.offsetWidth;
+    st.classList.add("hit");
+  }
+
+  function addHistory(rx) {
+    history = [rx].concat(history.filter(function (h) { return h.text !== rx.text; })).slice(0, 6);
+    var ul = $("hist-list");
+    ul.textContent = "";
+    history.forEach(function (h) {
+      var li = document.createElement("li");
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = h.label + " ← " + h.text;
+      b.addEventListener("click", function () { render(h); $("rx").scrollIntoView({ behavior: "smooth", block: "center" }); });
+      li.appendChild(b);
+      ul.appendChild(li);
+    });
+    $("hist").hidden = history.length < 2;
+  }
+
+  var noteTimer;
+  function note(msg) {
+    $("note").textContent = msg;
+    clearTimeout(noteTimer);
+    noteTimer = setTimeout(function () { $("note").textContent = ""; }, 6000);
+  }
+
+  function templateGen() {
+    var rx = makeTemplate();
+    render(rx);
+    addHistory(rx);
+    lastMode = "tpl";
+  }
+
+  function buildPrompt(details) {
+    var s = SIT[sitSel], t = TONE[toneSel];
+    return [
+      "تو «دکتر بهانه» هستی؛ یه دکتر بامزه که برای آدم‌ها «نسخه‌ی بهانه» می‌نویسه.",
+      "موقعیت کاربر: " + s.label,
+      "ماجرا به زبان خود کاربر: " + (details ? details : "چیزی ننوشته؛ خودت یه ماجرای خلاقانه و باورپذیر بساز."),
+      "لحن: " + t.ai,
+      "",
+      "قوانین:",
+      "- فارسی محاوره‌ای و طبیعی، دو تا چهار جمله.",
+      "- بهانه باید دقیقاً به همین موقعیت بخوره و اگه کاربر ماجرا نوشته، بهش وفادار باشه و جزئیاتش رو به‌کار ببره.",
+      "- متن آماده‌ی ارسال به مخاطب باشه و از زبان خود کاربر (اول‌شخص) نوشته بشه.",
+      "- بهانه‌ی مرگ، بیماری سخت، تصادف یا اتفاق وحشتناک برای آدم‌های واقعی نساز؛ این‌ها نگران‌کننده‌ان.",
+      "- هر بار یه چیز تازه بنویس و از کلیشه‌های تکراری دوری کن.",
+      "",
+      "فقط یک JSON با همین شکل برگردون و هیچ متن دیگه‌ای ننویس:",
+      '{"excuse": "متن بهانه", "belief": عددی بین ۵۵ تا ۹۶ برای باورپذیری, "usage": "طرز مصرف شوخ و کوتاه (حداکثر ۱۲ کلمه)", "side": "عوارض احتمالی شوخ و کوتاه (حداکثر ۱۰ کلمه)"}'
+    ].join("\n");
+  }
+
+  function fromAI(d) {
+    if (!d || typeof d !== "object" || typeof d.excuse !== "string") return null;
+    var text = d.excuse.trim();
+    if (!text || text.length > 700) return null;
+    var b = Math.round(Number(d.belief));
+    if (!(b >= 0)) b = 60 + Math.floor(Math.random() * 30);
+    b = Math.min(97, Math.max(40, b));
+    var usage = typeof d.usage === "string" && d.usage.trim() && d.usage.length <= 140 ? d.usage.trim() : pick(USAGE);
+    var side = typeof d.side === "string" && d.side.trim() && d.side.length <= 120 ? d.side.trim() : pick(SIDE);
+    return { text: text, belief: b, usage: usage, side: side, no: rxNo(),
+             label: SIT[sitSel].label + " · " + TONE[toneSel].label, sub: SIT[sitSel].label, src: "ساخته‌شده با هوش مصنوعی" };
+  }
+
+  function goLabel() { return aiOn ? "بهانه‌ی اختصاصی بساز" : "بهانه بساز"; }
+
+  function setBusy(on) {
+    busy = on;
+    var go = $("go");
+    go.disabled = on;
+    $("again").disabled = on;
+    $("copy").disabled = on;
+    go.classList.toggle("busy", on);
+    go.textContent = on ? "در حال نوشتن…" : goLabel();
+    $("rx").classList.toggle("loading", on);
+    $("rx").setAttribute("aria-busy", on ? "true" : "false");
+  }
+
+  function syncUI() {
+    $("story-field").hidden = !aiOn;
+    if (!busy) $("go").textContent = goLabel();
+  }
+
+  function aiGen() {
+    if (busy) return;
+    var details = $("details").value.trim().slice(0, 300);
+    setBusy(true);
+    note("");
+    var p;
+    try {
+      p = sampleFn.json(buildPrompt(details), { modelTier: "quick", cache: false });
+    } catch (e) {
+      p = Promise.reject({ code: "invalid_request" });
+    }
+    p.then(function (data) {
+      var rx = fromAI(data);
+      if (!rx) throw { code: "invalid_json" };
+      render(rx);
+      addHistory(rx);
+      lastMode = "ai";
+    }).catch(function (e) {
+      var code = e && e.code;
+      var gone = ["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"];
+      templateGen();
+      if (gone.indexOf(code) !== -1) {
+        aiOn = false;
+        syncUI();
+        note("هوش مصنوعی در دسترس نیست؛ فعلاً بهانه‌های آماده فعاله.");
+      } else if (code === "rate_limited") {
+        note("چند لحظه صبر کن و دوباره امتحان کن.");
+      } else if (code === "session_expired") {
+        note("یه بار دیگه وارد حساب کلودت شو.");
+      } else {
+        note("بهانه‌ی اختصاصی ساخته نشد و یه بهانه‌ی آماده نوشتم. دوباره امتحان کن.");
+      }
+    }).then(function () { setBusy(false); });
+  }
+
+  function generate() { if (aiOn) aiGen(); else templateGen(); }
+  function again() { if (lastMode === "ai" && aiOn) aiGen(); else templateGen(); }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("readonly", "");
+    ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  var copyTimer;
+  function copy() {
+    var text = current.text;
+    var btn = $("copy");
+    function done(ok) {
+      btn.textContent = ok ? "کپی شد" : "کپی نشد";
+      if (!ok) note("متن رو انتخاب کن و دستی کپی کن.");
+      clearTimeout(copyTimer);
+      copyTimer = setTimeout(function () { btn.textContent = "کپی بهانه"; }, 2000);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(fallbackCopy(text)); });
+    } else {
+      done(fallbackCopy(text));
+    }
+  }
+
+  buildPicks($("sits"), SIT, "sit", sitSel, function (k) { sitSel = k; templateGen(); });
+  buildPicks($("tones"), TONE, "tone", toneSel, function (k) { toneSel = k; templateGen(); });
+  $("go").addEventListener("click", generate);
+  $("again").addEventListener("click", again);
+  $("copy").addEventListener("click", copy);
+
+  var det = $("details");
+  function updateCount() { $("count").textContent = fa(det.value.length) + " از " + fa(300); }
+  det.addEventListener("input", updateCount);
+  det.addEventListener("keydown", function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { e.preventDefault(); generate(); }
+  });
+  updateCount();
+
+  try {
+    $("rx-date").textContent = new Date().toLocaleDateString("fa-IR", { year: "numeric", month: "long", day: "numeric" });
+  } catch (e) { $("rx-date").textContent = ""; }
+
+  templateGen();
+
+  try {
+    if (window.claude && typeof window.claude.use === "function") {
+      window.claude.use("sample").then(function (fn) {
+        if (typeof fn === "function") { sampleFn = fn; aiOn = true; }
+        syncUI();
+      }, function () { syncUI(); });
+    }
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>
