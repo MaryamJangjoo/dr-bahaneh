@@ -52,6 +52,7 @@ h1 span{color:var(--primary)}
 .step{display:grid;place-items:center;width:25px;height:25px;border-radius:9px;background:var(--primary-soft);color:var(--primary);font-size:.78rem;font-weight:800}
 .field .opt{font-size:.78rem;color:var(--muted);font-weight:400}
 .chips{display:flex;flex-wrap:wrap;gap:9px}
+.situation-select{width:100%;max-width:100%;appearance:none;border:1px solid var(--line);border-radius:14px;padding:12px 42px 12px 14px;background:var(--surface-soft);color:var(--ink);font:600 .92rem var(--font);outline:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2716%27 height=%2716%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23777686%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27m6 9 6 6 6-6%27/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:14px center}.situation-select:focus{border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 15%,transparent)}
 .pick{position:relative}
 .pick input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:1}
 .pick label{display:flex;align-items:center;gap:7px;padding:8px 13px;border:1px solid var(--line);border-radius:13px;background:var(--surface);color:var(--ink);font-size:.88rem;font-weight:600;transition:.18s ease;cursor:pointer}
@@ -146,8 +147,8 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     <section class="panel">
       <div class="stack">
         <fieldset class="field">
-          <legend><span class="step">۱</span> چه اتفاقی افتاده؟</legend>
-          <div class="chips" id="sits"></div>
+          <legend><span class="step">۱</span> موضوع بهانه چیه؟</legend>
+          <select class="situation-select" id="sits" aria-label="انتخاب موضوع بهانه"></select>
         </fieldset>
 
         <fieldset class="field">
@@ -177,7 +178,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
 
       <section class="paper" id="rx" aria-labelledby="res-title">
         <div class="paper-head">
-          <h2 id="res-title">عذرنامه‌ی رسمی</h2>
+          <h2 id="res-title">یه بهانه‌ی تازه!</h2>
           <span class="paper-meta">شماره‌ی <span id="rx-no"></span></span>
         </div>
         <div class="lines">
@@ -365,6 +366,22 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     }
   };
 
+
+  var EXTRA = {
+    late:{serious:["اتوبوس طبق برنامه نیومد و مجبور شدم مسیر رو عوض کنم","در خروج از خونه یک کار ضروری پیش اومد که چند دقیقه طول کشید","مسیر همیشگی به‌خاطر تعمیرات بسته شده بود"],funny:["کفش‌هام امروز با هم اختلاف نظر داشتن و انتخاب جفت مناسب زمان برد","از خونه زدم بیرون، ولی کلید تصمیم گرفت قایم‌موشک بازی کنه","چراغ قرمزها انگار امروز فقط برای من طولانی شده بودن"]},
+    deadline:{serious:["برای هماهنگ کردن بخش‌های مختلف کار منتظر پاسخ نهایی موندم","در بررسی نهایی چند ایراد پیدا کردم و ترجیح دادم قبل از ارسال برطرفشون کنم","نسخه‌ی پشتیبان با فایل اصلی هماهنگ نبود و زمان برد درستش کنم"],funny:["فایل نهایی اسمش final-final-واقعی بود، ولی خودش هنوز به قطعیت نرسیده بود","ماوسم وسط کار اعتصاب کرد و اتحادیه‌ی کلیک‌ها هم جواب نداد","پروژه به مرحله‌ای رسید که حتی خودش هم نمی‌دونست قراره چی بشه"]},
+    party:{serious:["امشب باید به یک موضوع شخصی رسیدگی کنم","برای فردا برنامه‌ی مهمی دارم و باید امشب استراحت کنم","زمان‌بندی امروز از دستم خارج شده و نمی‌رسم به جمع‌تون برسم"],funny:["لباس مهمونی با من به توافق نرسید و جلسه بی‌نتیجه موند","امشب در خانه مأموریت محرمانه‌ی استراحت دارم","انرژی اجتماعی‌ام فقط به اندازه‌ی سلام و خداحافظی باقی مونده"]},
+    reply:{serious:["فرصت نکردم پیام رو با دقت بخونم و جواب بدم","درگیر چند کار فوری شدم و زمان از دستم رفت","پیامت رو برای جواب دادن در فرصت مناسب نگه داشتم و یادم رفت برگردم"],funny:["داشتم جواب می‌دادم که انگشتم روی حالت ذخیره‌ی پیش‌نویس گیر کرد","پیامت وارد صف انتظار شد و مسئول صف خوابش برد","جوابم آماده بود؛ فقط هنوز از مرحله‌ی فکر به عمل نرسیده بود"]},
+    forgot:{serious:["یادآوری رو اشتباه تنظیم کرده بودم و دیر متوجه شدم","چند تاریخ نزدیک به هم رو با هم جابه‌جا کردم","این موضوع از ذهنم افتاد و مسئولیتش با خودمه؛ واقعاً ببخش"],funny:["حافظه‌ام امروز فایل پشتیبان نداشت","قولت توی ذهنم بود، ولی پوشه‌اش اشتباهی آرشیو شد","مغزم اعلان رو دید و گزینه‌ی بعداً یادآوری کن رو زد"]},
+    exam:{serious:["روش مطالعه‌ای که انتخاب کرده بودم نتیجه نداد و باید برنامه‌ام رو اصلاح کنم","چند مبحث زمان بیشتری از چیزی که فکر می‌کردم لازم داشتن","به‌جای مرور پراکنده، ترجیح دادم روی بخش‌های مهم‌تر تمرکز کنم"],funny:["جزوه رو خوندم؛ فقط ظاهراً جزوه منو نخونده بود","سؤال‌ها و جواب‌ها هنوز برای آشنایی اولیه وقت می‌خوان","مغزم سر جلسه دنبال دکمه‌ی جست‌وجو می‌گرده"]},
+    birthday:{serious:["باید زودتر پیام می‌دادم و هیچ بهانه‌ای جای تبریک به‌موقع رو نمی‌گیره","تاریخ رو اشتباه وارد تقویم کردم و دیر متوجه شدم","این روز برام مهمه؛ فقط در گفتنش کوتاهی کردم"],funny:["تقویمم یک روز مرخصی گرفته بود و من هم متوجه نشدم","تبریکم با تأخیر ارسال شد چون از مسیر کادوپیچی ذهنی می‌اومد","کیک خیالی آماده بود، فقط پیام تبریک توی راه جا موند"]},
+    cancel:{serious:["یک موضوع پیش‌بینی‌نشده برنامه‌ام رو تغییر داده","امروز شرایطش رو ندارم و نمی‌خوام با عجله و بی‌حوصلگی بیام","باید یک کار عقب‌افتاده رو همین امروز جمع کنم"],funny:["تقویمم برای امشب برنامه‌ی سکوت و آرامش رزرو کرده","من و مبل به توافق رسیدیم که امشب از خونه خارج نشیم","امروز نسخه‌ی بیرون‌رفتن من نصب نشده"]},
+    broke:{serious:["ترجیح می‌دم این هفته هزینه‌ی اضافه نکنم","چند خرج ضروری پیش اومده و باید فعلاً محتاط باشم","اگه موافقی یک برنامه‌ی رایگان‌تر بچینیم"],funny:["کیف پولم فقط کارت عضویت کتابخونه رو قبول می‌کنه","موجودی حسابم به مرحله‌ی مینیمالیسم رسیده","پول‌هام رفتن جلسه و هنوز صورت‌جلسه رو نفرستادن"]},
+    phone:{serious:["گوشی رو برای مدتی خاموش کرده بودم تا روی کارم تمرکز کنم","شارژر همراهم نبود و باتری تموم شد","اعلان‌ها به دستم نرسیدن و دیر متوجه شدم"],funny:["گوشی وارد اعتصاب خاموشی شد و مذاکره جواب نداد","باتری با دیدن حجم کارها استعفا داد","گوشی رفته بود دنبال خودش؛ بالاخره پیداش کردم"]},
+    overslept:{serious:["شب قبل دیر خوابیدم و صبح نتونستم به‌موقع بیدار شم","زنگ هشدار رو اشتباه تنظیم کرده بودم","بدنم به استراحت بیشتری نیاز داشت و خوابم برد"],funny:["بالش من درخواست پنج دقیقه‌ی اضافه داد و پنجاه دقیقه گرفت","ساعت زنگ زد، ولی من در خواب جلسه رو تمدید کردم","از خواب بیدار شدم؛ فقط نه در ساعتی که قرار بود"]},
+    call:{serious:["الان در فضای مناسبی برای مکالمه نیستم","ترجیح می‌دم وقتی ذهنم آزادتره باهات صحبت کنم","می‌تونم فعلاً پیام بدم و بعداً تماس بگیرم؟"],funny:["امروز کلماتم فقط از راه پیام‌رسان ارسال می‌شن","میکروفون ذهنم موقتاً قطع شده","حالت مکالمه‌ی من امروز روی ذخیره‌ی انرژی تنظیم شده"]}
+  };
+
   var USAGE = [
     "با لحن مطمئن و نگاه مستقیم به چشم بیان شود",
     "یک‌بار در روز مصرف شود؛ تکرار توصیه نمی‌شود",
@@ -401,16 +418,32 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     });
   }
 
+  function buildSituationSelect() {
+    var select = $("sits");
+    Object.keys(SIT).forEach(function (key) {
+      var option = document.createElement("option");
+      option.value = key; option.textContent = SIT[key].label; select.appendChild(option);
+    });
+    select.value = sitSel;
+    select.addEventListener("change", function () { sitSel = select.value; templateGen(); });
+  }
+
+  function toneTitle(key) {
+    return {formal:"متن پیشنهادی",funny:"یه بهانه‌ی بامزه!",poetic:"چند خط از دل ماجرا",dramatic:"روایت یک فاجعه‌ی تاریخی"}[key] || "یه بهانه‌ی تازه!";
+  }
+
   function rxNo() { return fa(1405) + "-" + fa(1000 + Math.floor(Math.random() * 9000)); }
 
   function makeTemplate() {
     var s = SIT[sitSel], t = TONE[toneSel];
-    var pool = t.pool === "both" ? s.serious.concat(s.funny) : s[t.pool];
+    var basePool = t.pool === "both" ? s.serious.concat(s.funny) : s[t.pool];
+    var extraPool = EXTRA[sitSel] ? (t.pool === "both" ? EXTRA[sitSel].serious.concat(EXTRA[sitSel].funny) : EXTRA[sitSel][t.pool]) : [];
+    var pool = basePool.concat(extraPool);
     var rx;
     for (var i = 0; i < 6; i++) {
       var text = pick(t.open) + s.lead + pick(pool) + "." + pick(t.close);
       rx = { text: text, belief: 55 + Math.floor(Math.random() * 42), usage: pick(USAGE), side: pick(SIDE),
-             no: rxNo(), label: s.label + " · " + t.label, sub: s.label, src: "قالب آماده" };
+             no: rxNo(), label: s.label + " · " + t.label, sub: s.label, toneTitle: toneTitle(toneSel), src: "قالب آماده" };
       if (!current || rx.text !== current.text) break;
     }
     return rx;
@@ -424,6 +457,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     $("side").textContent = rx.side;
     $("rx-no").textContent = rx.no;
     $("subj").textContent = rx.sub;
+    $("res-title").textContent = rx.toneTitle || toneTitle(toneSel);
     $("src").textContent = rx.src;
     var st = $("stamp");
     st.classList.remove("hit");
@@ -492,7 +526,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     var usage = typeof d.usage === "string" && d.usage.trim() && d.usage.length <= 140 ? d.usage.trim() : pick(USAGE);
     var side = typeof d.side === "string" && d.side.trim() && d.side.length <= 120 ? d.side.trim() : pick(SIDE);
     return { text: text, belief: b, usage: usage, side: side, no: rxNo(),
-             label: SIT[sitSel].label + " · " + TONE[toneSel].label, sub: SIT[sitSel].label, src: "هوش مصنوعی · OpenRouter" };
+             label: SIT[sitSel].label + " · " + TONE[toneSel].label, sub: SIT[sitSel].label, toneTitle: toneTitle(toneSel), src: "هوش مصنوعی" };
   }
 
   function goLabel() { return "با هوش مصنوعی بهانه بساز"; }
@@ -621,7 +655,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     }
   }
 
-  buildPicks($("sits"), SIT, "sit", sitSel, function (k) { sitSel = k; templateGen(); });
+  buildSituationSelect();
   buildPicks($("tones"), TONE, "tone", toneSel, function (k) { toneSel = k; templateGen(); });
   $("go").addEventListener("click", generate);
   $("again").addEventListener("click", again);
