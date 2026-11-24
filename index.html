@@ -423,14 +423,8 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
     "درخواست مدرک"
   ];
 
-  var SITUATION_THEMES = {
-    late: ["#b77b55","#805235"], deadline: ["#647db8","#465d96"],
-    party: ["#c47a9b","#92516f"], reply: ["#559b9a","#347674"],
-    forgot: ["#9a83bd","#705895"], exam: ["#648cbd","#45678f"],
-    birthday: ["#c18a4e","#8d622e"], cancel: ["#8b8e9e","#626575"],
-    broke: ["#5d987b","#3e7058"], phone: ["#668eaa","#45677f"],
-    overslept: ["#b47e87","#86565f"], call: ["#7d8bba","#596796"]
-  };
+  // دارک مود از همان بنفش قبلی استفاده می‌کند؛ رنگ موضوع‌ها در این حالت تغییر نمی‌کند.
+  var DARK_THEME_COLORS = ["#aaa4ff", "#c4c0ff"];
   // لایت مود از رنگ‌های خود ابر استفاده می‌کند؛ دارک مود دقیقاً پالت قبلی را نگه می‌دارد.
   var CLOUD_LIGHT_THEMES = {
     late: ["#8C73C9","#6F58AA"], deadline: ["#9580D0","#715CB0"],
@@ -448,7 +442,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
   }
   function applySituationTheme(key) {
     var root = document.documentElement;
-    var colors = isDarkMode() ? (SITUATION_THEMES[key] || SITUATION_THEMES.late) :
+    var colors = isDarkMode() ? DARK_THEME_COLORS :
       (CLOUD_LIGHT_THEMES[key] || CLOUD_LIGHT_THEMES.late);
     root.dataset.situation = key;
     root.style.setProperty("--primary", colors[0]);
