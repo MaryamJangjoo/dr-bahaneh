@@ -1,318 +1,214 @@
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#D9EAFB">
-<meta name="description" content="دکتر بهانه؛ برای هر موقعیت یک عذرنامه‌ی بامزه و خلاقانه بساز.">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>دکتر بهانه</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: a single column on a dotted sky-blue desk. Sticker-style choices on top, a big red button, then the result as a ruled notebook page taped to the desk: subject line, excuse in ballpoint-blue, two P.S. lines, a signature squiggle and a red rubber stamp that carries the believability score. */
-:root {
-  --bg: #D9EAFB;
-  --dot: #B8D3F0;
-  --paper: #FFFFFF;
-  --paper-edge: #C6DBF2;
-  --paper-shadow: 0 12px 28px rgba(18, 28, 80, 0.16);
-  --rule: #D3E4F7;
-  --margin: #F2A3A8;
-  --ink: #1D2B6B;
-  --muted: #4A5993;
-  --hi: #FFE066;
-  --hi-ink: #1D2B6B;
-  --hl: #FFE066;
-  --red: #D63B42;
-  --red-ink: #FFFFFF;
-  --red-deep: #A82A30;
-  --stamp: #D63B42;
-  --tape: rgba(255, 214, 70, 0.82);
-  --sweat: #6EBBFF;
-  --font: "Vazirmatn", Tahoma, system-ui, sans-serif;
-  --font-display: "Lalezar", "Vazirmatn", Tahoma, sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #10162B;
-    --dot: #1C2648;
-    --paper: #1A2142;
-    --paper-edge: #2E3A6C;
-    --paper-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
-    --rule: #2A3566;
-    --margin: #8A4A5A;
-    --ink: #E6ECFF;
-    --muted: #A5B2E6;
-    --hi: #FFE066;
-    --hi-ink: #1D2B6B;
-    --hl: rgba(255, 224, 102, 0.32);
-    --red: #FF7B80;
-    --red-ink: #2A0B0D;
-    --red-deep: #C2474D;
-    --stamp: #FF8E92;
-    --tape: rgba(255, 224, 102, 0.55);
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #10162B;
-  --dot: #1C2648;
-  --paper: #1A2142;
-  --paper-edge: #2E3A6C;
-  --paper-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
-  --rule: #2A3566;
-  --margin: #8A4A5A;
-  --ink: #E6ECFF;
-  --muted: #A5B2E6;
-  --hi: #FFE066;
-  --hi-ink: #1D2B6B;
-  --hl: rgba(255, 224, 102, 0.32);
-  --red: #FF7B80;
-  --red-ink: #2A0B0D;
-  --red-deep: #C2474D;
-  --stamp: #FF8E92;
-  --tape: rgba(255, 224, 102, 0.55);
-  color-scheme: dark;
-}
 
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background-color: var(--bg);
-  background-image: radial-gradient(var(--dot) 1.6px, transparent 1.8px);
-  background-size: 22px 22px;
-  color: var(--ink);
-  font-family: var(--font);
-  font-size: 16px;
-  line-height: 1.8;
-  direction: rtl;
-  padding-block: 34px 52px;
-  padding-left: max(18px, env(safe-area-inset-left, 0px));
-  padding-right: max(18px, env(safe-area-inset-right, 0px));
+:root{
+  color-scheme:light;
+  --bg:#f7f5f1;--surface:#fffefa;--surface-soft:#f4f1eb;--ink:#303044;
+  --muted:#777486;--line:#e9e4dc;--primary:#7167b8;--primary-dark:#554d91;
+  --primary-soft:#efedf8;--coral:#df8278;--coral-soft:#fbefeb;
+  --yellow:#f2dfad;--green:#57977e;--shadow:0 12px 34px rgba(55,48,38,.055);
+  --radius:24px;--font:"Vazirmatn",Tahoma,system-ui,sans-serif;
+  --font-display:"Lalezar","Vazirmatn",Tahoma,sans-serif;
 }
-.shell { max-width: 600px; margin-inline: auto; display: flex; flex-direction: column; gap: 30px; }
-
-header { display: flex; align-items: center; gap: 14px; }
-.mascot { flex: none; width: 70px; height: 70px; transform: rotate(-6deg); }
-h1 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(2.5rem, 10vw, 3.4rem); line-height: 1.15; }
-h1 span { background: linear-gradient(transparent 58%, var(--hl) 58%, var(--hl) 92%, transparent 92%); padding-inline: 6px; }
-.sub { margin: 0; color: var(--muted); font-size: 0.97rem; font-weight: 500; }
-
-.stack { display: flex; flex-direction: column; gap: 26px; }
-.field { border: 0; padding: 0; margin: 0; min-width: 0; }
-.field > legend, .field > label.lbl { padding: 0; margin-bottom: 10px; font-family: var(--font-display); font-size: 1.3rem; line-height: 1.4; display: block; }
-.field .opt { font-family: var(--font); font-size: 0.85rem; color: var(--muted); }
-
-.chips { display: flex; flex-wrap: wrap; gap: 10px 8px; }
-.pick { position: relative; }
-.pick input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; z-index: 1; }
-.pick label {
-  display: block; padding: 4px 16px; border-radius: 999px;
-  border: 2px solid var(--ink); background: var(--paper); color: var(--ink);
-  box-shadow: 0 3px 0 var(--ink);
-  font-size: 0.95rem; font-weight: 600; line-height: 1.8;
-  transition: transform 0.12s, background 0.12s;
+:root[data-theme="dark"]{
+  color-scheme:dark;--bg:#15182a;--surface:#20243a;--surface-soft:#292e49;
+  --ink:#f0f1ff;--muted:#a8aec8;--line:#353b59;--primary:#aaa4ff;
+  --primary-dark:#c4c0ff;--primary-soft:#343252;--coral:#ff9992;
+  --coral-soft:#3c2b35;--yellow:#574b32;--green:#70d1ad;
+  --shadow:0 18px 55px rgba(0,0,0,.22);
 }
-.pick:nth-child(odd) label { transform: rotate(-1.2deg); }
-.pick:nth-child(even) label { transform: rotate(1deg); }
-.pick:hover label { transform: translateY(-2px) rotate(0deg); }
-.pick input:checked + label { background: var(--hi); color: var(--hi-ink); transform: rotate(0deg) scale(1.05); box-shadow: 0 1px 0 var(--ink); }
-.pick input:focus-visible + label { outline: 3px solid var(--ink); outline-offset: 3px; }
-
-textarea {
-  display: block; width: 100%; min-height: 92px; resize: vertical;
-  font-family: inherit; font-size: 1rem; line-height: 1.8; color: var(--ink);
-  background: var(--paper); border: 2px solid var(--ink); border-radius: 16px; padding: 10px 14px;
-  box-shadow: 0 3px 0 var(--ink);
+@media(prefers-color-scheme:dark){
+ :root:not([data-theme="light"]){color-scheme:dark;--bg:#15182a;--surface:#20243a;--surface-soft:#292e49;--ink:#f0f1ff;--muted:#a8aec8;--line:#353b59;--primary:#aaa4ff;--primary-dark:#c4c0ff;--primary-soft:#343252;--coral:#ff9992;--coral-soft:#3c2b35;--yellow:#574b32;--green:#70d1ad;--shadow:0 18px 55px rgba(0,0,0,.22)}
 }
-textarea::placeholder { color: var(--muted); opacity: 1; }
-textarea:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-.under { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; color: var(--muted); font-size: 0.82rem; font-weight: 500; }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font:15px/1.9 var(--font);direction:rtl;padding:34px 20px 42px}
+button,textarea{font:inherit}
+button{ -webkit-tap-highlight-color:transparent}
+.shell{width:min(1060px,100%);margin:auto;display:flex;flex-direction:column;gap:26px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:15px;min-width:0}
+.mascot-wrap{width:66px;height:66px;flex:none;display:grid;place-items:center;border-radius:22px;background:var(--yellow);transform:rotate(-4deg)}
+.mascot{width:58px;height:58px}
+h1{margin:0;font:400 clamp(2rem,5vw,2.8rem)/1.2 var(--font-display);letter-spacing:-.5px}
+h1 span{color:var(--primary)}
+.sub{margin:3px 0 0;color:var(--muted);font-size:.92rem;font-weight:500}
+.top-note{display:flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);font-size:.82rem;white-space:nowrap}
+.top-note i{width:8px;height:8px;border-radius:50%;background:var(--muted);display:inline-block;flex:none}.top-note.online i{background:var(--green)}.top-note.offline i{background:var(--coral)}
+.intro{padding:19px 22px;border:1px solid #e9e7ff;background:var(--primary-soft);border-radius:20px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+:root[data-theme="dark"] .intro{border-color:var(--line)}
+.intro p{margin:0;font-size:.94rem;color:var(--muted)}
+.intro strong{color:var(--ink)}
+.intro-emoji{font-size:1.8rem;flex:none}
+.workspace{display:flex;flex-direction:column;gap:22px;align-items:stretch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:25px;box-shadow:var(--shadow)}
+.stack{display:flex;flex-direction:column;gap:23px}
+.field{border:0;padding:0;margin:0;min-width:0}
+.field>legend,.field>label.lbl{padding:0;margin:0 0 11px;display:flex;align-items:center;gap:9px;font-weight:800;font-size:1rem}
+.step{display:grid;place-items:center;width:25px;height:25px;border-radius:9px;background:var(--primary-soft);color:var(--primary);font-size:.78rem;font-weight:800}
+.field .opt{font-size:.78rem;color:var(--muted);font-weight:400}
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.pick{position:relative}
+.pick input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:1}
+.pick label{display:flex;align-items:center;gap:7px;padding:8px 13px;border:1px solid var(--line);border-radius:13px;background:var(--surface);color:var(--ink);font-size:.88rem;font-weight:600;transition:.18s ease;cursor:pointer}
+.pick label:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--line);transition:.18s}
+.pick input:checked+label{background:var(--primary-soft);border-color:var(--primary);color:var(--primary-dark);box-shadow:0 0 0 2px color-mix(in srgb,var(--primary) 12%,transparent)}
+.pick input:checked+label:before{background:var(--primary)}
+.pick input:focus-visible+label{outline:3px solid var(--primary);outline-offset:3px}
+.pick label:hover{border-color:var(--primary);transform:translateY(-1px)}
+textarea{display:block;width:100%;min-height:112px;resize:vertical;color:var(--ink);background:var(--surface-soft);border:1px solid var(--line);border-radius:15px;padding:12px 14px;outline:none;transition:.2s}
+textarea::placeholder{color:var(--muted);opacity:.8}
+textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 15%,transparent)}
+.under{display:flex;justify-content:space-between;gap:10px;margin-top:7px;color:var(--muted);font-size:.75rem}
+.go{width:100%;border:0;border-radius:15px;padding:13px 20px;background:var(--primary);color:white;font-weight:800;font-size:1.03rem;box-shadow:0 3px 0 var(--primary-dark);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:.15s}
+.go:hover:not(:disabled){filter:brightness(1.04);transform:translateY(-1px);box-shadow:0 4px 0 var(--primary-dark)}
+.go:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--primary-dark)}
+.go:disabled{opacity:.75;cursor:progress}
+.go:focus-visible,.btn:focus-visible,.hist button:focus-visible,footer a:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+.busy:before{content:"";width:17px;height:17px;border:2px solid currentColor;border-left-color:transparent;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.helper{margin:-13px 0 0;text-align:center;color:var(--muted);font-size:.76rem}
+.result-panel{position:static}
+.result-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+.result-title{display:flex;align-items:center;gap:10px}
+.result-icon{width:38px;height:38px;border-radius:13px;background:var(--coral-soft);display:grid;place-items:center;font-size:1.15rem}
+.result-title h2{font:400 1.4rem/1.4 var(--font-display);margin:0}
+.paper-meta{color:var(--muted);font-size:.72rem;white-space:nowrap}
+.paper{position:relative;overflow:hidden;background:var(--surface-soft);border:1px solid var(--line);border-radius:19px;padding:22px 21px 18px}
+.paper:before{content:"";position:absolute;top:0;right:0;left:0;height:4px;background:var(--primary)}
+.paper-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding-bottom:13px;border-bottom:1px dashed var(--line)}
+.paper-head h2{font:400 1.2rem var(--font-display);margin:0}
+.src{display:inline-flex;margin-inline-start:6px;padding:2px 9px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:.68rem;font-weight:700;vertical-align:middle}
+.lines{padding-top:13px;transition:opacity .2s}
+.lines p{margin:0 0 10px}
+.lines .subject{font-weight:800;font-size:.9rem}
+.lines .excuse{min-height:116px;font-size:1rem;line-height:2.15}
+.lines .ps{padding-top:9px;border-top:1px dashed var(--line);color:var(--muted);font-size:.8rem}
+.lines .ps b{color:var(--ink)}
+.lines .gap{margin-top:12px}
+.paper.loading .lines{opacity:.35}
+.sign{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.sign-line{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:.8rem}
+.stamp{border:2px solid var(--coral);color:var(--coral);border-radius:10px;padding:4px 12px;text-align:center;line-height:1.35;font:400 1.08rem var(--font-display);transform:rotate(-4deg)}
+.stamp small{display:block;font:700 .68rem var(--font)}
+.stamp.hit{animation:thump .32s ease-out}
+@keyframes thump{from{transform:rotate(-4deg) scale(1.4);opacity:0}to{transform:rotate(-4deg) scale(1);opacity:1}}
+.actions{display:flex;gap:10px;margin-top:15px}
+.btn{flex:1;border:1px solid var(--line);border-radius:13px;padding:10px 13px;cursor:pointer;font-size:.86rem;font-weight:700;transition:.15s}
+.btn.solid{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.btn.plain{background:var(--surface);color:var(--ink)}
+.btn:hover:not(:disabled){transform:translateY(-1px);border-color:var(--primary)}
+.btn:disabled{opacity:.55;cursor:progress}
+.note{min-height:1.6em;margin:10px 0 0;color:var(--muted);font-size:.78rem;text-align:center}
+.hist{border-top:1px solid var(--line);margin-top:17px;padding-top:14px}
+.hist summary{cursor:pointer;font-weight:700;font-size:.88rem;color:var(--muted)}
+.hist ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+.hist button{width:100%;text-align:start;font:500 .8rem var(--font);color:var(--ink);background:var(--surface-soft);border:1px solid var(--line);border-radius:10px;padding:8px 11px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hist button:hover{border-color:var(--primary)}
+footer{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);font-size:.76rem;padding:0 5px;text-align:center}
+footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{align-self:flex-end;margin-top:7px;font-size:.66rem;letter-spacing:.2px;opacity:.72}
+@media(max-width:760px){body{padding:22px 14px 30px}.panel{padding:20px;border-radius:20px}.shell{gap:18px}.top-note{display:none}.intro{padding:15px 17px}}
+@media(max-width:420px){.mascot-wrap{width:55px;height:55px;border-radius:18px}.mascot{width:50px;height:50px}.brand{gap:11px}.sub{font-size:.8rem}.paper{padding:19px 15px 15px}.paper-meta{font-size:.65rem}.actions{gap:8px}.btn{padding:9px 8px;font-size:.8rem}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
-.go {
-  width: 100%;
-  font-family: var(--font-display); font-size: 1.6rem; line-height: 1.5;
-  background: var(--red); color: var(--red-ink);
-  border: 0; border-radius: 18px;
-  box-shadow: 0 6px 0 var(--red-deep);
-  padding: 8px 24px; cursor: pointer;
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  transition: transform 0.08s, box-shadow 0.08s;
-}
-.go:hover:not(:disabled) { transform: translateY(1px); box-shadow: 0 5px 0 var(--red-deep); }
-.go:active:not(:disabled) { transform: translateY(5px); box-shadow: 0 1px 0 var(--red-deep); }
-.go:disabled { opacity: 0.8; cursor: progress; }
-.go:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
-.busy::before {
-  content: ""; width: 18px; height: 18px; border-radius: 50%;
-  border: 3px solid currentColor; border-inline-end-color: transparent;
-  animation: spin 0.8s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-
-.paper {
-  position: relative;
-  background: var(--paper);
-  border: 1px solid var(--paper-edge);
-  border-radius: 6px 6px 16px 16px;
-  box-shadow: var(--paper-shadow);
-  padding: 30px 22px 24px 22px;
-  padding-inline-start: 62px;
-  transform: rotate(-0.5deg);
-  margin-top: 6px;
-}
-.paper::before { content: ""; position: absolute; inset-block: 0; inset-inline-start: 46px; width: 2px; background: var(--margin); }
-.paper::after {
-  content: ""; position: absolute; inset-block: 0; inset-inline-start: 12px; width: 20px;
-  background:
-    radial-gradient(circle at 50% 14%, var(--bg) 0 6px, transparent 6.5px),
-    radial-gradient(circle at 50% 50%, var(--bg) 0 6px, transparent 6.5px),
-    radial-gradient(circle at 50% 86%, var(--bg) 0 6px, transparent 6.5px);
-}
-.tape { position: absolute; top: -14px; left: 50%; width: 104px; height: 28px; background: var(--tape); transform: translateX(-50%) rotate(-3deg); }
-
-.paper-head { display: flex; justify-content: space-between; align-items: baseline; gap: 2px 12px; flex-wrap: wrap; }
-.paper-head h2 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 1.55rem; line-height: 1.4; }
-.paper-meta { color: var(--muted); font-size: 0.8rem; font-weight: 500; }
-.src { display: inline-block; margin-inline-start: 8px; padding: 0 10px; border-radius: 999px; background: var(--hi); color: var(--hi-ink); font-size: 0.72rem; font-weight: 700; line-height: 1.7; vertical-align: middle; }
-
-.lines { margin-top: 10px; background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(2.2rem - 1px), var(--rule) calc(2.2rem - 1px), var(--rule) 2.2rem); transition: opacity 0.2s; }
-.lines p { margin: 0; line-height: 2.2rem; font-size: 1.08rem; }
-.lines .subject { font-weight: 700; }
-.lines .excuse { min-height: 8.8rem; }
-.lines .ps { color: var(--muted); font-size: 0.95rem; }
-.lines .ps b { color: var(--ink); }
-.lines .gap { margin-top: 2.2rem; }
-.paper.loading .lines { opacity: 0.3; }
-
-.sign { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 14px; }
-.sign-line { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 0.9rem; font-weight: 500; }
-.stamp {
-  border: 3px double var(--stamp); color: var(--stamp); border-radius: 10px;
-  padding: 2px 16px; text-align: center; line-height: 1.35;
-  font-family: var(--font-display); font-size: 1.35rem;
-  transform: rotate(-8deg);
-}
-.stamp small { display: block; font-family: var(--font); font-size: 0.78rem; font-weight: 700; }
-.stamp.hit { animation: thump 0.35s ease-out; }
-@keyframes thump { from { transform: rotate(-8deg) scale(1.7); opacity: 0; } to { transform: rotate(-8deg) scale(1); opacity: 1; } }
-
-.actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.btn {
-  flex: 1 1 150px;
-  font-family: inherit; font-size: 0.97rem; font-weight: 700; line-height: 1.5;
-  border: 2px solid var(--ink); border-radius: 14px; padding: 9px 18px; cursor: pointer;
-  box-shadow: 0 4px 0 var(--ink);
-  transition: transform 0.08s, box-shadow 0.08s;
-}
-.btn.solid { background: var(--ink); color: var(--paper); }
-.btn.plain { background: var(--paper); color: var(--ink); }
-.btn:hover:not(:disabled) { transform: translateY(1px); box-shadow: 0 3px 0 var(--ink); }
-.btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 0 0 var(--ink); }
-.btn:disabled { opacity: 0.6; cursor: progress; }
-.btn:focus-visible, summary:focus-visible, .hist button:focus-visible, footer a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-.note { min-height: 1.7em; margin: -10px 0 0; color: var(--muted); font-size: 0.88rem; font-weight: 500; }
-
-.hist summary { cursor: pointer; font-family: var(--font-display); font-size: 1.15rem; }
-.hist ul { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-.hist button {
-  width: 100%; text-align: start; font-family: inherit; font-size: 0.9rem; font-weight: 500; color: var(--ink);
-  background: var(--paper); border: 1.5px solid var(--paper-edge); border-radius: 12px; padding: 6px 14px; cursor: pointer;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;
-}
-.hist button:hover { border-color: var(--ink); }
-
-footer { color: var(--muted); font-size: 0.85rem; font-weight: 500; display: flex; flex-direction: column; gap: 2px; text-align: center; }
-footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text-decoration-color: var(--hl); text-decoration-thickness: 3px; text-underline-offset: 3px; }
-
-@media (max-width: 420px) {
-  .paper { padding-inline-start: 56px; padding-inline-end: 16px; }
-  .paper::before { inset-inline-start: 42px; }
-  .paper::after { inset-inline-start: 10px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .stamp.hit { animation: none; }
-  .busy::before { animation-duration: 2s; }
-  .go, .btn, .pick label, .lines { transition: none; }
-}
 </style>
 
-</head>
-<body>
 <div class="shell" lang="fa" dir="rtl">
-  <header>
-    <svg class="mascot" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-      <circle cx="40" cy="42" r="30" fill="var(--hi)" stroke="var(--ink)" stroke-width="3"/>
-      <circle cx="30" cy="38" r="3.4" fill="var(--ink)"/>
-      <circle cx="50" cy="38" r="3.4" fill="var(--ink)"/>
-      <path d="M24 30 q6 -5 12 -1" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
-      <path d="M31 53 q4 -4 8 0 t8 0" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
-      <path d="M64 14 q6 9 0 14 q-6 -5 0 -14Z" fill="var(--sweat)" stroke="var(--ink)" stroke-width="2"/>
-    </svg>
-    <div>
-      <h1><span>دکتر بهانه</span></h1>
-      <p class="sub">عذرنامه‌ی رسمی با تأییدیه‌ی خودمونی</p>
+  <header class="topbar">
+    <div class="brand">
+      <div class="mascot-wrap">
+        <svg class="mascot" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+          <circle cx="40" cy="42" r="29" fill="#FFE7A3" stroke="#5149bd" stroke-width="3"/>
+          <circle cx="30" cy="38" r="3.2" fill="#252b45"/><circle cx="50" cy="38" r="3.2" fill="#252b45"/>
+          <path d="M24 30q6-5 12-1M32 53q8 7 16 0" stroke="#252b45" stroke-width="3" stroke-linecap="round"/>
+          <path d="M64 14q6 9 0 14q-6-5 0-14Z" fill="#8bd7ef" stroke="#5149bd" stroke-width="2"/>
+        </svg>
+      </div>
+      <div>
+        <h1>دکتر <span>بهانه</span></h1>
+        <p class="sub">برای وقت‌هایی که کلمه‌ها کم می‌آرن.</p>
+      </div>
     </div>
+    <div class="top-note" id="connection-status"><i></i><span id="connection-label">آماده‌ی اتصال به هوش مصنوعی</span></div>
   </header>
 
-  <main class="stack">
-    <fieldset class="field">
-      <legend>چه گندی زدی؟</legend>
-      <div class="chips" id="sits"></div>
-    </fieldset>
+  <div class="intro">
+    <p><strong>اول بگو چه اتفاقی افتاده؛</strong> بعد لحن دلخواهت رو انتخاب کن تا نسخه‌ات آماده بشه.</p>
+    <span class="intro-emoji" aria-hidden="true">🩺</span>
+  </div>
 
-    <fieldset class="field">
-      <legend>با چه لحنی بگیم؟</legend>
-      <div class="chips" id="tones"></div>
-    </fieldset>
+  <main class="workspace">
+    <section class="panel">
+      <div class="stack">
+        <fieldset class="field">
+          <legend><span class="step">۱</span> چه اتفاقی افتاده؟</legend>
+          <div class="chips" id="sits"></div>
+        </fieldset>
 
-    <div class="field" id="story-field" hidden>
-      <label class="lbl" for="details">ماجرا رو تعریف کن <span class="opt">(اختیاری)</span></label>
-      <textarea id="details" maxlength="300" placeholder="مثلاً: صبح دیر رسیدم و مدیرم دم در منتظرم بود"></textarea>
-      <div class="under"><span>هر چی بیشتر بگی، بهانه دقیق‌تر می‌شه.</span><span id="count"></span></div>
-    </div>
+        <fieldset class="field">
+          <legend><span class="step">۲</span> با چه لحنی بگیم؟</legend>
+          <div class="chips" id="tones"></div>
+        </fieldset>
 
-    <button class="go" id="go" type="button">بهانه بساز</button>
-
-    <section class="paper" id="rx" aria-labelledby="res-title">
-      <div class="tape" aria-hidden="true"></div>
-      <div class="paper-head">
-        <h2 id="res-title">عذرنامه‌ی رسمی</h2>
-        <span class="paper-meta"><span id="rx-date"></span> · شماره‌ی <span id="rx-no"></span></span>
-      </div>
-      <div class="lines">
-        <p class="subject">موضوع: <span id="subj"></span><span class="src" id="src"></span></p>
-        <p class="excuse" id="excuse" aria-live="polite"></p>
-        <p class="ps gap"><b>پ.ن.</b> طرز مصرف: <span id="usage"></span></p>
-        <p class="ps"><b>پ.ن.</b> عوارض احتمالی: <span id="side"></span></p>
-      </div>
-      <div class="sign">
-        <div class="sign-line">
-          <span>امضا:</span>
-          <svg width="92" height="24" viewBox="0 0 92 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 17c8-15 12-15 14-4s6 8 12-2 10-10 14-2 8 6 16-4 12 2 22 4"/></svg>
+        <div class="field" id="story-field">
+          <label class="lbl" for="details"><span class="step">۳</span> ماجرا رو برام تعریف کن <span class="opt">(اختیاری)</span></label>
+          <textarea id="details" maxlength="300" placeholder="مثلاً: صبح دیر رسیدم و مدیرم دم در منتظرم بود..."></textarea>
+          <div class="under"><span>جزئیات بیشتر، بهانه‌ی اختصاصی‌تر!</span><span id="count"></span></div>
         </div>
-        <div class="stamp" id="stamp" aria-label="مهر تأیید">تأییدشده<small>باورپذیری <span id="belief-n"></span></small></div>
+
+        <button class="go" id="go" type="button">با هوش مصنوعی بهانه بساز</button>
+        <p class="helper">متن بهانه با هوش مصنوعی ساخته می‌شود؛ توضیحاتت فقط برای همین درخواست استفاده می‌شود.</p>
       </div>
     </section>
 
-    <div class="actions">
-      <button class="btn solid" id="copy" type="button">کپی بهانه</button>
-      <button class="btn plain" id="again" type="button">یه بهانه‌ی دیگه</button>
-      <button class="btn plain" id="share" type="button">اشتراک‌گذاری</button>
-      <button class="btn plain" id="install" type="button" hidden>نصب دکتر بهانه</button>
-    </div>
-    <p class="note" id="note" role="status" aria-live="polite"></p>
+    <section class="panel result-panel" aria-label="نتیجه بهانه">
+      <div class="result-top">
+        <div class="result-title">
+          <span class="result-icon" aria-hidden="true">📝</span>
+          <h2>نسخه‌ی شما آماده‌ست</h2>
+        </div>
+        <span class="paper-meta"><span id="rx-date"></span></span>
+      </div>
 
-    <details class="hist" id="hist" hidden>
-      <summary>بهانه‌های قبلی</summary>
-      <ul id="hist-list"></ul>
-    </details>
+      <section class="paper" id="rx" aria-labelledby="res-title">
+        <div class="paper-head">
+          <h2 id="res-title">عذرنامه‌ی رسمی</h2>
+          <span class="paper-meta">شماره‌ی <span id="rx-no"></span></span>
+        </div>
+        <div class="lines">
+          <p class="subject">موضوع: <span id="subj"></span><span class="src" id="src"></span></p>
+          <p class="excuse" id="excuse" aria-live="polite"></p>
+          <p class="ps gap"><b>💊 طرز مصرف:</b> <span id="usage"></span></p>
+          <p class="ps"><b>⚠️ عوارض احتمالی:</b> <span id="side"></span></p>
+        </div>
+        <div class="sign">
+          <div class="sign-line">
+            <span>با احترام،</span>
+            <svg width="82" height="22" viewBox="0 0 92 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 17c8-15 12-15 14-4s6 8 12-2 10-10 14-2 8 6 16-4 12 2 22 4"/></svg>
+          </div>
+          <div class="stamp" id="stamp" aria-label="مهر تأیید">تأییدشده<small>باورپذیری <span id="belief-n"></span></small></div>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button class="btn solid" id="copy" type="button">📋 کپی بهانه</button>
+        <button class="btn plain" id="again" type="button">🔄 یکی دیگه</button>
+      </div>
+      <p class="note" id="note" role="status" aria-live="polite"></p>
+
+      <details class="hist" id="hist" hidden>
+        <summary>🗂 بهانه‌های قبلی</summary>
+        <ul id="hist-list"></ul>
+      </details>
+    </section>
   </main>
 
   <footer>
-    <span>ساخته‌شده در <a href="https://timim.ir" target="_blank" rel="noopener">timim.ir</a></span>
-    <span>بهانه‌ها برای سرگرمی‌ان. با آدم‌های مهم زندگیت صادق باش.</span>
+    <span>دکتر بهانه <span aria-hidden="true">·</span> کلینیک بهانه‌های غیررسمی</span>
+    <span>برای سرگرمیه؛ با آدم‌های مهم زندگیت صادق باش 💛</span>
   </footer>
 </div>
 
@@ -399,119 +295,6 @@ footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text
         "فراموش نکرده بودم؛ فقط داشتم تمرین می‌کردم که یادم نیاد تا غافلگیرت کنم"
       ]
     }
-,
-    exam: {
-      label: "برای امتحان آماده نیستم",
-      lead: "برای امتحان امروز یه توضیح دارم؛ ",
-      serious: [
-        "برنامه‌ی مطالعه‌ام به‌خاطر چند کار پیش‌بینی‌نشده به هم ریخت و هنوز به جمع‌بندی نرسیدم",
-        "بخشی از جزوه‌ای که لازم داشتم دیر به دستم رسید و فرصت مرور کامل نداشتم",
-        "دیشب نتونستم تمرکز کافی داشته باشم و ترجیح می‌دم صادقانه بگم آماده نیستم",
-        "چند مبحث رو اشتباه اولویت‌بندی کردم و زمان کم آوردم"
-      ],
-      funny: [
-        "مغزم هنوز در حال دانلود فصل آخره و اینترنتش هم ضعیفه",
-        "کتاب رو باز کردم؛ کتاب هم منو دید و هر دو سکوت کردیم",
-        "مطالب رو خونده بودم، ولی ظاهراً حافظه‌ام باهاشون قرارداد کوتاه‌مدت بسته بود",
-        "جزوه و من به تفاهم نرسیدیم؛ جلسه‌ی بعدی مذاکره رو می‌ذاریم"
-      ]
-    },
-    birthday: {
-      label: "تولدشو یادم رفت",
-      lead: "برای اینکه تولدت رو دیر تبریک گفتم، واقعاً شرمنده‌ام؛ ",
-      serious: [
-        "تاریخ رو اشتباه توی تقویمم ثبت کرده بودم و تازه متوجه شدم",
-        "این چند روز درگیر چند موضوع خانوادگی بودم و از زمان غافل شدم",
-        "می‌دونم تبریک دیرهنگام جای تبریک به‌موقع رو نمی‌گیره، اما برام مهمی و عذر می‌خوام",
-        "یادم بود که این روز نزدیکه، ولی روز دقیق رو اشتباه حساب کردم"
-      ],
-      funny: [
-        "تبریک من با تأخیر پستی از راه رسیده؛ لطفاً بسته رو با لبخند تحویل بگیر",
-        "خواستم تولدت رو کش بدم که جشن بیشتر طول بکشه؛ نقشه‌ام زیادی موفق شد",
-        "تقویمم وارد منطقه‌ی زمانی سیاره‌ی دیگه‌ای شده بود",
-        "تبریکم دیر رسید، ولی آرزوی خوبم تاریخ انقضا نداره"
-      ]
-    },
-    cancel: {
-      label: "می‌خوام قرارو کنسل کنم",
-      lead: "بابت اینکه باید قرارمون رو جابه‌جا کنم معذرت می‌خوام؛ ",
-      serious: [
-        "یه کار ضروری پیش اومده که زمانش دست من نیست؛ می‌تونیم برای روز دیگه هماهنگ کنیم؟",
-        "امروز انرژی و تمرکز کافی ندارم و نمی‌خوام با بی‌حوصلگی وقتت رو بگیرم",
-        "برنامه‌ی کاری‌ام تغییر کرده و نمی‌رسم سر ساعت حاضر باشم",
-        "یه موضوع شخصی پیش اومده و ترجیح می‌دم امروز قرار رو عقب بندازیم"
-      ],
-      funny: [
-        "نسخه‌ی امروزم از من با قرار بیرون رفتن سازگار نیست؛ می‌شه آپدیتش کنیم به فردا؟",
-        "باتری اجتماعی‌ام روی یک درصده و شارژرم هم معلوم نیست کجاست",
-        "امروز ستاره‌ها و تقویم و زانوهام هم‌نظر شدن که خونه بمونم",
-        "قرارمون رو کنسل نمی‌کنم، فقط می‌فرستمش به آینده‌ای نزدیک‌تر"
-      ]
-    },
-    broke: {
-      label: "پول ندارم بیرون بیام",
-      lead: "برای بیرون اومدن این بار باید یه عذرخواهی کنم؛ ",
-      serious: [
-        "این ماه باید هزینه‌هام رو مدیریت کنم و فعلاً نمی‌تونم برای بیرون رفتن هزینه کنم",
-        "بودجه‌ام تا آخر ماه محدوده؛ اگه موافقی یه برنامه‌ی کم‌هزینه‌تر بچینیم",
-        "این روزها چند خرج ضروری دارم و بهتره فعلاً قرار رو عقب بندازم",
-        "ترجیح می‌دم فعلاً هزینه‌ی اضافه نکنم، ولی دلم می‌خواد ببینمت"
-      ],
-      funny: [
-        "کارت بانکی‌ام فعلاً فقط برای نگاه کردن به موجودی استفاده می‌شه",
-        "حسابم به مرحله‌ای رسیده که دستگاه خودپرداز بهم دلداری می‌ده",
-        "پولم رفته مرخصی و هنوز تاریخ برگشتش مشخص نیست",
-        "کیف پولم امروز صدای جیرجیر می‌ده؛ فکر کنم از تنهایی باشه"
-      ]
-    },
-    phone: {
-      label: "گوشیم خاموش بود",
-      lead: "ببخشید که در دسترس نبودم؛ ",
-      serious: [
-        "شارژ گوشیم تموم شده بود و تا دسترسی به شارژر نداشتم نتونستم جواب بدم",
-        "گوشی برای مدتی مشکل پیدا کرده بود و اعلان‌ها رو دریافت نمی‌کردم",
-        "برای تمرکز گوشی رو روی حالت مزاحم نشو گذاشته بودم و متوجه تماس نشدم",
-        "مدتی از گوشی دور بودم و تازه پیام‌ها رو دیدم"
-      ],
-      funny: [
-        "گوشیم تصمیم گرفته بود زندگی مینیمال بدون ارتباطات رو تجربه کنه",
-        "باتری به عدد صفر رسید و گوشی هم استعفاش رو ثبت کرد",
-        "گوشیم رفت توی کما؛ الان با موفقیت برگشته",
-        "آنتن‌ها با هم قهر کرده بودن و من وسط دعواشون گیر افتادم"
-      ]
-    },
-    overslept: {
-      label: "خواب موندم",
-      lead: "ببخشید که خواب موندم؛ ",
-      serious: [
-        "دیشب خوابم به‌هم ریخته بود و زنگ هشدار رو متوجه نشدم",
-        "آلارم گوشیم به‌درستی تنظیم نشده بود و دیر بیدار شدم",
-        "چند روز کم‌خوابی داشتم و امروز بدنم بیشتر از حد انتظار استراحت کرد",
-        "زمان رو اشتباه محاسبه کردم و بابت تأخیر عذر می‌خوام"
-      ],
-      funny: [
-        "تخت خوابم درخواست تمدید اقامت داد و من هم نتونستم رد کنم",
-        "با آلارم مذاکره کردم که فقط پنج دقیقه دیگه بخوابم؛ مذاکره به ضررم تموم شد",
-        "خوابم اونقدر جذاب بود که قسمت بعدی رو هم تماشا کردم",
-        "من بیدار شدم، ولی روحم هنوز زیر پتو بود"
-      ]
-    },
-    call: {
-      label: "حوصله‌ی تماس ندارم",
-      lead: "الان شرایط تماس تلفنی ندارم؛ ",
-      serious: [
-        "الان نمی‌تونم با تمرکز صحبت کنم؛ می‌تونیم پیام بدیم یا بعداً تماس بگیریم؟",
-        "وسط کاری هستم و نمی‌خوام نصفه‌نیمه به حرف‌هات گوش بدم",
-        "امروز کمی به سکوت نیاز دارم؛ در اولین فرصت باهات تماس می‌گیرم",
-        "محیط مناسبی برای صحبت ندارم؛ اگر فوریه لطفاً پیام بده"
-      ],
-      funny: [
-        "صدای من امروز روی حالت ذخیره‌ی انرژی تنظیم شده",
-        "مغزم فعلاً فقط پیام متنی رو پشتیبانی می‌کنه",
-        "امروز قابلیت مکالمه‌ی صوتی من در حال تعمیره",
-        "زبانم مرخصیه؛ انگشتام هنوز سر کارن، پیام بده"
-      ]
-    }
   };
 
   var TONE = {
@@ -552,9 +335,7 @@ footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text
 
   var sitSel = "late", toneSel = "formal";
   var current = null, history = [];
-  var installPrompt = null;
-  var HISTORY_KEY = "dr-bahane-history-v1";
-  var sampleFn = null, aiOn = false, busy = false, lastMode = "tpl";
+  var aiOn = true, busy = false, lastMode = "tpl";
 
   function fa(n) { return Number(n).toLocaleString("fa-IR", { useGrouping: false }); }
   function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
@@ -606,8 +387,7 @@ footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text
   }
 
   function addHistory(rx) {
-    history = [rx].concat(history.filter(function (h) { return h.text !== rx.text; })).slice(0, 12);
-    try { localStorage.setItem(HISTORY_KEY, JSON.stringify(history)); } catch (e) {}
+    history = [rx].concat(history.filter(function (h) { return h.text !== rx.text; })).slice(0, 6);
     var ul = $("hist-list");
     ul.textContent = "";
     history.forEach(function (h) {
@@ -666,10 +446,10 @@ footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text
     var usage = typeof d.usage === "string" && d.usage.trim() && d.usage.length <= 140 ? d.usage.trim() : pick(USAGE);
     var side = typeof d.side === "string" && d.side.trim() && d.side.length <= 120 ? d.side.trim() : pick(SIDE);
     return { text: text, belief: b, usage: usage, side: side, no: rxNo(),
-             label: SIT[sitSel].label + " · " + TONE[toneSel].label, sub: SIT[sitSel].label, src: "ساخته‌شده با هوش مصنوعی" };
+             label: SIT[sitSel].label + " · " + TONE[toneSel].label, sub: SIT[sitSel].label, src: "هوش مصنوعی · OpenRouter" };
   }
 
-  function goLabel() { return aiOn ? "بهانه‌ی اختصاصی بساز" : "بهانه بساز"; }
+  function goLabel() { return "با هوش مصنوعی بهانه بساز"; }
 
   function setBusy(on) {
     busy = on;
@@ -684,47 +464,52 @@ footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text
   }
 
   function syncUI() {
-    $("story-field").hidden = !aiOn;
+    $("story-field").hidden = false;
     if (!busy) $("go").textContent = goLabel();
   }
 
-  function aiGen() {
+  async function aiGen() {
     if (busy) return;
     var details = $("details").value.trim().slice(0, 300);
     setBusy(true);
     note("");
-    var p;
     try {
-      p = sampleFn.json(buildPrompt(details), { modelTier: "quick", cache: false });
-    } catch (e) {
-      p = Promise.reject({ code: "invalid_request" });
-    }
-    p.then(function (data) {
-      var rx = fromAI(data);
-      if (!rx) throw { code: "invalid_json" };
+      var response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          situation: sitSel,
+          tone: toneSel,
+          details: details
+        })
+      });
+
+      var payload = await response.json().catch(function () { return {}; });
+      if (!response.ok) {
+        var message = payload && payload.error ? payload.error : "ساخت بهانه ناموفق بود.";
+        throw new Error(message);
+      }
+
+      var rx = fromAI(payload);
+      if (!rx) throw new Error("پاسخ هوش مصنوعی قابل پردازش نبود.");
       render(rx);
       addHistory(rx);
       lastMode = "ai";
-    }).catch(function (e) {
-      var code = e && e.code;
-      var gone = ["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"];
+    } catch (e) {
       templateGen();
-      if (gone.indexOf(code) !== -1) {
-        aiOn = false;
-        syncUI();
-        note("هوش مصنوعی در دسترس نیست؛ فعلاً بهانه‌های آماده فعاله.");
-      } else if (code === "rate_limited") {
-        note("چند لحظه صبر کن و دوباره امتحان کن.");
-      } else if (code === "session_expired") {
-        note("یه بار دیگه وارد حساب کلودت شو.");
+      var msg = e && e.message ? e.message : "";
+      if (msg.indexOf("Failed to fetch") !== -1 || msg.indexOf("NetworkError") !== -1) {
+        note("ارتباط با سرور برقرار نشد؛ نسخه‌ی آماده نمایش داده شد.");
       } else {
-        note("بهانه‌ی اختصاصی ساخته نشد و یه بهانه‌ی آماده نوشتم. دوباره امتحان کن.");
+        note((msg || "ارتباط با هوش مصنوعی برقرار نشد.") + " نسخه‌ی آماده نمایش داده شد.");
       }
-    }).then(function () { setBusy(false); });
+    } finally {
+      setBusy(false);
+    }
   }
 
   function generate() { if (aiOn) aiGen(); else templateGen(); }
-  function again() { if (lastMode === "ai" && aiOn) aiGen(); else templateGen(); }
+  function again() { aiGen(); }
 
   function fallbackCopy(text) {
     var ta = document.createElement("textarea");
@@ -740,7 +525,6 @@ footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text
 
   var copyTimer;
   function copy() {
-    if (!current) return;
     var text = current.text;
     var btn = $("copy");
     function done(ok) {
@@ -761,41 +545,6 @@ footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text
   $("go").addEventListener("click", generate);
   $("again").addEventListener("click", again);
   $("copy").addEventListener("click", copy);
-  $("share").addEventListener("click", function () {
-    if (!current) return;
-    var text = current.text + "\\n\\n— دکتر بهانه";
-    if (navigator.share) {
-      navigator.share({ title: "نسخه‌ی دکتر بهانه", text: text }).catch(function (e) {
-        if (e && e.name !== "AbortError") note("اشتراک‌گذاری انجام نشد؛ می‌تونی متن رو کپی کنی.");
-      });
-    } else {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(function () { note("متن آماده‌ی اشتراک‌گذاری کپی شد."); }, function () { note("امکان اشتراک‌گذاری در این مرورگر فعال نیست."); });
-      } else {
-        note("امکان اشتراک‌گذاری در این مرورگر فعال نیست.");
-      }
-    }
-  });
-
-  window.addEventListener("beforeinstallprompt", function (event) {
-    event.preventDefault();
-    installPrompt = event;
-    $("install").hidden = false;
-  });
-  $("install").addEventListener("click", async function () {
-    if (!installPrompt) return;
-    installPrompt.prompt();
-    try {
-      var choice = await installPrompt.userChoice;
-      if (choice && choice.outcome === "accepted") note("دکتر بهانه به دستگاهت اضافه شد.");
-    } catch (e) {}
-    installPrompt = null;
-    $("install").hidden = true;
-  });
-  window.addEventListener("appinstalled", function () {
-    $("install").hidden = true;
-    note("دکتر بهانه با موفقیت نصب شد.");
-  });
 
   var det = $("details");
   function updateCount() { $("count").textContent = fa(det.value.length) + " از " + fa(300); }
@@ -809,45 +558,18 @@ footer a { color: var(--ink); font-weight: 700; text-decoration: underline; text
     $("rx-date").textContent = new Date().toLocaleDateString("fa-IR", { year: "numeric", month: "long", day: "numeric" });
   } catch (e) { $("rx-date").textContent = ""; }
 
-  try {
-    var saved = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
-    if (Array.isArray(saved)) {
-      history = saved.filter(function (x) { return x && typeof x.text === "string"; }).slice(0, 12);
-      if (history.length) {
-        var ul = $("hist-list");
-        history.forEach(function (h) {
-          var li = document.createElement("li");
-          var b = document.createElement("button");
-          b.type = "button";
-          b.textContent = (h.label || "بهانه‌ی قبلی") + " ← " + h.text;
-          b.addEventListener("click", function () { render(h); $("rx").scrollIntoView({ behavior: "smooth", block: "center" }); });
-          li.appendChild(b); ul.appendChild(li);
-        });
-        $("hist").hidden = history.length < 2;
-      }
-    }
-  } catch (e) {}
-
   templateGen();
 
-  if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
-    window.addEventListener("load", function () {
-      navigator.serviceWorker.register("./sw.js").catch(function () {
-        note("حالت آفلاین در این مرورگر فعال نشد.");
-      });
+  fetch("/api/health")
+    .then(function (r) { if (!r.ok) throw new Error("offline"); return r.json(); })
+    .then(function () {
+      $("connection-status").classList.add("online");
+      $("connection-label").textContent = "متصل به هوش مصنوعی";
+    })
+    .catch(function () {
+      $("connection-status").classList.add("offline");
+      $("connection-label").textContent = "اتصال هوش مصنوعی پس از راه‌اندازی سرور";
     });
-  }
-
-  try {
-    if (window.claude && typeof window.claude.use === "function") {
-      window.claude.use("sample").then(function (fn) {
-        if (typeof fn === "function") { sampleFn = fn; aiOn = true; }
-        syncUI();
-      }, function () { syncUI(); });
-    }
-  } catch (e) {}
 })();
 </script>
-
-</body>
-</html>
+</body></html>
