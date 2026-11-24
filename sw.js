@@ -1,9 +1,9 @@
-const CACHE_NAME = "dr-bahane-v2";
+const CACHE_NAME = "dr-bahane-v3";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
-  "./icon.svg"
+  "./icon.svg?v=3"
 ];
 
 self.addEventListener("install", (event) => {
