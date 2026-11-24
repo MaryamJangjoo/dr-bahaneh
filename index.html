@@ -52,7 +52,7 @@ h1 span{color:var(--primary)}
 .step{display:grid;place-items:center;width:25px;height:25px;border-radius:9px;background:var(--primary-soft);color:var(--primary);font-size:.78rem;font-weight:800}
 .field .opt{font-size:.78rem;color:var(--muted);font-weight:400}
 .chips{display:flex;flex-wrap:wrap;gap:9px}
-.situation-select{width:100%;max-width:100%;appearance:none;border:1px solid var(--line);border-radius:14px;padding:12px 42px 12px 14px;background:var(--surface-soft);color:var(--ink);font:600 .92rem var(--font);outline:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2716%27 height=%2716%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%23777686%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27m6 9 6 6 6-6%27/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:14px center}.situation-select:focus{border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 15%,transparent)}
+.situation-picker{position:relative;width:100%}.situation-select{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:14px;padding:12px 15px;background:var(--surface-soft);color:var(--ink);font:600 .92rem var(--font);text-align:right;outline:none;cursor:pointer;transition:border-color .18s,box-shadow .18s}.situation-select:hover,.situation-select[aria-expanded=true]{border-color:var(--primary)}.situation-select:focus-visible{box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 15%,transparent)}.select-chevron{width:9px;height:9px;flex:none;border-left:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg) translateY(-2px);transition:transform .18s}.situation-select[aria-expanded=true] .select-chevron{transform:rotate(135deg) translate(-2px,-2px)}.situation-menu{position:absolute;z-index:20;top:calc(100% + 7px);right:0;left:0;max-height: min(310px,55vh);overflow:auto;padding:6px;border:1px solid var(--line);border-radius:15px;background:var(--surface);box-shadow:var(--shadow)}.situation-menu[hidden]{display:none}.situation-option{display:flex;align-items:center;width:100%;padding:10px 12px;border:0;border-radius:10px;background:transparent;color:var(--ink);font:500 .88rem var(--font);text-align:right;cursor:pointer}.situation-option:hover,.situation-option:focus-visible{outline:none;background:var(--primary-soft);color:var(--primary-dark)}.situation-option[aria-selected=true]{background:var(--primary-soft);color:var(--primary-dark);font-weight:800}.situation-option[aria-selected=true]:before{content:"✓";margin-left:9px;color:var(--primary)}
 .pick{position:relative}
 .pick input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:1}
 .pick label{display:flex;align-items:center;gap:7px;padding:8px 13px;border:1px solid var(--line);border-radius:13px;background:var(--surface);color:var(--ink);font-size:.88rem;font-weight:600;transition:.18s ease;cursor:pointer}
@@ -148,7 +148,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
       <div class="stack">
         <fieldset class="field">
           <legend><span class="step">۱</span> موضوع بهانه چیه؟</legend>
-          <select class="situation-select" id="sits" aria-label="انتخاب موضوع بهانه"></select>
+          <div class="situation-picker" id="situation-picker"><button class="situation-select" id="sits" type="button" aria-label="انتخاب موضوع بهانه" aria-haspopup="listbox" aria-expanded="false"><span id="sits-label">دیر رسیدم</span><span class="select-chevron" aria-hidden="true"></span></button><div class="situation-menu" id="sits-menu" role="listbox" aria-label="موضوع‌های بهانه" hidden></div></div>
         </fieldset>
 
         <fieldset class="field">
@@ -419,15 +419,66 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
   }
 
   function buildSituationSelect() {
-    var select = $("sits");
+    var trigger = $("sits");
+    var menu = $("sits-menu");
+    var label = $("sits-label");
+    function closeMenu() {
+      menu.hidden = true;
+      trigger.setAttribute("aria-expanded", "false");
+    }
+    function choose(key) {
+      if (!SIT[key]) return;
+      sitSel = key;
+      label.textContent = SIT[key].label;
+      Array.prototype.forEach.call(menu.children, function (item) {
+        item.setAttribute("aria-selected", item.dataset.value === key ? "true" : "false");
+      });
+      closeMenu();
+      templateGen();
+    }
     Object.keys(SIT).forEach(function (key) {
-      var option = document.createElement("option");
-      option.value = key; option.textContent = SIT[key].label; select.appendChild(option);
+      var option = document.createElement("button");
+      option.type = "button";
+      option.className = "situation-option";
+      option.role = "option";
+      option.dataset.value = key;
+      option.textContent = SIT[key].label;
+      option.setAttribute("aria-selected", key === sitSel ? "true" : "false");
+      option.addEventListener("click", function () { choose(key); });
+      menu.appendChild(option);
     });
-    select.value = sitSel;
-    select.addEventListener("change", function () { sitSel = select.value; templateGen(); });
+    label.textContent = SIT[sitSel].label;
+    trigger.addEventListener("click", function () {
+      var opening = menu.hidden;
+      menu.hidden = !opening;
+      trigger.setAttribute("aria-expanded", opening ? "true" : "false");
+      if (opening) {
+        var selected = menu.querySelector('[data-value="' + sitSel + '"]');
+        if (selected) selected.focus();
+      }
+    });
+    trigger.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowDown" || event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        menu.hidden = false;
+        trigger.setAttribute("aria-expanded", "true");
+        var selected = menu.querySelector('[data-value="' + sitSel + '"]');
+        if (selected) selected.focus();
+      }
+    });
+    menu.addEventListener("keydown", function (event) {
+      var options = Array.prototype.slice.call(menu.querySelectorAll(".situation-option"));
+      var index = options.indexOf(document.activeElement);
+      if (event.key === "Escape") { event.preventDefault(); closeMenu(); trigger.focus(); }
+      else if (event.key === "ArrowDown") { event.preventDefault(); options[(index + 1) % options.length].focus(); }
+      else if (event.key === "ArrowUp") { event.preventDefault(); options[(index - 1 + options.length) % options.length].focus(); }
+      else if (event.key === "Home") { event.preventDefault(); options[0].focus(); }
+      else if (event.key === "End") { event.preventDefault(); options[options.length - 1].focus(); }
+    });
+    document.addEventListener("click", function (event) {
+      if (! $("situation-picker").contains(event.target)) closeMenu();
+    });
   }
-
   function toneTitle(key) {
     return {formal:"متن پیشنهادی",funny:"یه بهانه‌ی بامزه!",poetic:"چند خط از دل ماجرا",dramatic:"روایت یک فاجعه‌ی تاریخی"}[key] || "یه بهانه‌ی تازه!";
   }
