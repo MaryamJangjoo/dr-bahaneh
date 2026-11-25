@@ -1,15 +1,14 @@
-const CACHE_NAME = "dr-bahane-v7";
+const CACHE_NAME = "dr-bahane-v8";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
-  "./icon.svg?v=4",
-  "./favicon.svg?v=4",
-  "./favicon.ico?v=4",
-  "./apple-touch-icon.png?v=4",
-  "./icons/icon-192.png?v=4",
-  "./icons/icon-512.png?v=4",
-  "./icons/icon-maskable-512.png?v=4"
+  "./favicon.ico?v=5",
+  "./favicon-32.png?v=5",
+  "./apple-touch-icon.png?v=5",
+  "./icons/icon-192.png?v=5",
+  "./icons/icon-512.png?v=5",
+  "./icons/icon-maskable-512.png?v=5"
 ];
 
 self.addEventListener("install", (event) => {
