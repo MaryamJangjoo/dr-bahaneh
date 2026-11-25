@@ -47,7 +47,10 @@ py -m http.server 8080
 - `index.html`: رابط کاربری و منطق اصلی
 - `manifest.webmanifest`: مشخصات نصب PWA
 - `sw.js`: کش پوسته و حالت آفلاین
-- `icon.svg`: آیکون برنامه
+- `icon.svg`: آیکون اصلی برنامه
+- `favicon.svg` و `favicon.ico`: فاویکون تب مرورگر (نسخه‌ی ساده‌تر برای اندازه‌ی کوچک)
+- `apple-touch-icon.png`: آیکون صفحه‌ی اصلی آیفون و آیپد
+- `icons/`: آیکون‌های PNG نصب PWA (۱۹۲، ۵۱۲ و ۵۱۲ ماسکابل)
 - `docs/PWA.md`: راهنمای تست PWA
 
 ## سازنده
