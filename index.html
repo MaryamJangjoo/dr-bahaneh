@@ -16,7 +16,8 @@
 .launch-inner{display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;color:#6F58AA}
 .launch-cloud{width:132px;height:132px;object-fit:contain;filter:drop-shadow(0 12px 22px rgba(113,88,170,.15));animation:cloud-float 1.8s ease-in-out infinite}
 .launch-name{margin:0;font:400 2.15rem/1.2 Lalezar,Tahoma,sans-serif;color:#6F58AA}
-.launch-caption{margin:0;font:500 .85rem/1.8 Vazirmatn,Tahoma,sans-serif;color:#82749B}
+.launch-welcome{margin:0;font:600 .9rem/1.6 Vazirmatn,Tahoma,sans-serif;color:#82749B}
+.launch-caption{margin:0;max-width:19rem;min-height:3.6em;font:500 .85rem/1.8 Vazirmatn,Tahoma,sans-serif;color:#82749B}
 .launch-dots{display:flex;gap:5px;margin-top:8px}
 .launch-dots i{width:6px;height:6px;border-radius:50%;background:#8C73C9;animation:launch-dot .8s ease-in-out infinite alternate}
 .launch-dots i:nth-child(2){animation-delay:.18s}.launch-dots i:nth-child(3){animation-delay:.36s}
@@ -26,8 +27,9 @@
 <div id="launch-splash" role="status" aria-label="دکتر بهانه در حال آماده شدن">
   <div class="launch-inner">
     <img class="launch-cloud" src="icons/icon-512.png?v=5" alt="">
+    <p class="launch-welcome">خوش اومدی به کلینیک</p>
     <p class="launch-name">دکتر بهانه</p>
-    <p class="launch-caption">داریم نسخه‌ات رو آماده می‌کنیم...</p>
+    <p class="launch-caption" id="launch-caption">دکتر داره دفترچه‌ی نسخه‌ش رو پیدا می‌کنه...</p>
     <span class="launch-dots" aria-hidden="true"><i></i><i></i><i></i></span>
   </div>
 </div>
@@ -70,8 +72,8 @@ button{ -webkit-tap-highlight-color:transparent}
 @media(max-width:760px){.top-actions{gap:7px}.theme-toggle{min-height:38px;padding:7px 10px;font-size:.76rem}}
 @media(max-width:420px){.top-actions{gap:6px}.theme-toggle{padding:7px 9px}.theme-toggle .theme-label{display:none}}
 .brand{display:flex;align-items:center;gap:15px;min-width:0}
-.mascot-wrap{width:66px;height:66px;flex:none;display:grid;place-items:center;border-radius:22px;background:var(--primary-soft);transform:rotate(-4deg);transition:background .2s}
-.mascot{width:58px;height:58px}
+.mascot-wrap{width:66px;height:66px;flex:none;display:grid;place-items:center;transform:rotate(-4deg);filter:drop-shadow(0 6px 12px rgba(91,70,130,.22))}
+.mascot{width:66px;height:66px;display:block;border-radius:22%}
 h1{margin:0;font:400 clamp(2rem,5vw,2.8rem)/1.2 var(--font-display);letter-spacing:-.5px}
 h1 span{color:var(--primary)}
 .sub{margin:3px 0 0;color:var(--muted);font-size:.92rem;font-weight:500}
@@ -152,7 +154,7 @@ textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in srg
 footer{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);font-size:.76rem;padding:0 5px;text-align:center}
 footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{align-self:flex-end;margin-top:7px;font-size:.66rem;letter-spacing:.2px;opacity:.72}
 @media(max-width:760px){body{padding:22px 14px 30px}.panel{padding:20px;border-radius:20px}.shell{gap:18px}.top-note{display:none}.intro{padding:15px 17px}}
-@media(max-width:420px){.mascot-wrap{width:55px;height:55px;border-radius:18px}.mascot{width:50px;height:50px}.brand{gap:11px}.sub{font-size:.8rem}.paper{padding:19px 15px 15px}.paper-meta{font-size:.65rem}.actions{gap:8px}.btn{padding:9px 8px;font-size:.8rem}}
+@media(max-width:420px){.mascot-wrap{width:56px;height:56px}.mascot{width:56px;height:56px}.brand{gap:11px}.sub{font-size:.8rem}.paper{padding:19px 15px 15px}.paper-meta{font-size:.65rem}.actions{gap:8px}.btn{padding:9px 8px;font-size:.8rem}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
 </style>
@@ -161,12 +163,7 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
   <header class="topbar">
     <div class="brand">
       <div class="mascot-wrap">
-        <svg class="mascot" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-          <circle cx="40" cy="42" r="29" fill="#FFE7A3" stroke="#5149bd" stroke-width="3"/>
-          <circle cx="30" cy="38" r="3.2" fill="#252b45"/><circle cx="50" cy="38" r="3.2" fill="#252b45"/>
-          <path d="M24 30q6-5 12-1M32 53q8 7 16 0" stroke="#252b45" stroke-width="3" stroke-linecap="round"/>
-          <path d="M64 14q6 9 0 14q-6-5 0-14Z" fill="#8bd7ef" stroke="#5149bd" stroke-width="2"/>
-        </svg>
+        <img class="mascot" src="icons/icon-192.png?v=5" width="66" height="66" alt="">
       </div>
       <div>
         <h1>دکتر <span>بهانه</span></h1>
@@ -265,10 +262,20 @@ footer a{color:var(--muted);font-weight:600;text-decoration:none}.site-mark{alig
 (function () {
   var launchSplash = document.getElementById("launch-splash");
   if (launchSplash) {
+    var LAUNCH_LINES = [
+      "دکتر داره دفترچه‌ی نسخه‌ش رو پیدا می‌کنه...",
+      "یه بهانه‌ی باورپذیر داره دم می‌کشه...",
+      "منشی گفت یه لحظه صبر کن، دکتر داره عینکش رو می‌زنه...",
+      "دارم مهر «تأییدشده» رو گرم می‌کنم...",
+      "نوبت بیماران دیر رسیده‌ست، شما بعدی هستی...",
+      "داریم یه عذر موجه برات آماده می‌کنیم..."
+    ];
+    var launchCaption = document.getElementById("launch-caption");
+    if (launchCaption) launchCaption.textContent = LAUNCH_LINES[Math.floor(Math.random() * LAUNCH_LINES.length)];
     window.setTimeout(function () {
       launchSplash.classList.add("is-leaving");
       window.setTimeout(function () { launchSplash.remove(); }, 380);
-    }, 1600);
+    }, 2000);
   }
 
   var SIT = {
